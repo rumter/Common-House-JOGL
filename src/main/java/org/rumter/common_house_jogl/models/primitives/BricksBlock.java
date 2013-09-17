@@ -1,4 +1,5 @@
-package org.rumter.common_house_jogl.models;
+package org.rumter.common_house_jogl.models.primitives;
+
 
 /**
  * Кирпичный блок

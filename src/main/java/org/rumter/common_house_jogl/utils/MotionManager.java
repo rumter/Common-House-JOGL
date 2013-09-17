@@ -3,6 +3,9 @@ package org.rumter.common_house_jogl.utils;
 import javax.media.opengl.GL2;
 
 import org.rumter.common_house_jogl.App;
+import org.rumter.common_house_jogl.geom.Plane;
+import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.models.primitives.Wall;
 
 /**
  * движение в 3D пространстве
@@ -10,31 +13,22 @@ import org.rumter.common_house_jogl.App;
  * @author Митин Илья
  * @email rumtery@yandex.ru
  */
-public class Motion {
-	private static Motion instance = null;
-
-	public static Motion getInstance() {
-		if (instance == null) {
-			instance = new Motion();
-		}
-		return instance;
-	}
+public class MotionManager {
 
 	private final float step = 1.0f;
 	private final float stepH = 1.0f;
 
-	public static float rotateX = 0.0f;
-	public static float rotateY = 0.0f;
+	public float rotateX = 0.0f;
+	public float rotateY = 0.0f;
 	private Point position = new Point(0, 1.5f, -100);
 
-	private Motion() {
+	public MotionManager() {
 	}
 
 	public void display() {
 		GL2 gl = App.gl;
 		gl.glRotatef(rotateX, 1.0f, 0.0f, 0.0f);
 		gl.glRotatef(rotateY, 0.0f, 1.0f, 0.0f);
-
 		gl.glTranslatef(-position.x, -position.y, -position.z);
 	}
 
@@ -56,7 +50,7 @@ public class Motion {
 		}
 		// пол
 		if (p.y <= groundHeight) {
-			// return false;
+			return false;
 		}
 		return true;
 	}

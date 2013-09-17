@@ -1,12 +1,15 @@
-package org.rumter.common_house_jogl.models;
+package org.rumter.common_house_jogl.models.house;
 
 import java.util.ArrayList;
 
-import org.rumter.common_house_jogl.models.windows.BlackStairsWindow;
-import org.rumter.common_house_jogl.models.windows.FlatCell;
-import org.rumter.common_house_jogl.models.windows.MainStairsWindow;
-import org.rumter.common_house_jogl.models.windows.WashRoomWindow;
-import org.rumter.common_house_jogl.models.windows.WindowsBlock;
+import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.models.house.windows.BlackStairsWindow;
+import org.rumter.common_house_jogl.models.house.windows.FlatCell;
+import org.rumter.common_house_jogl.models.house.windows.MainStairsWindow;
+import org.rumter.common_house_jogl.models.house.windows.WashRoomWindow;
+import org.rumter.common_house_jogl.models.house.windows.WindowsBlock;
+import org.rumter.common_house_jogl.models.primitives.BricksBlock;
 
 /**
  * Жилая часть общежития
@@ -32,10 +35,10 @@ class MainHousePart extends SimpleModel {
 	 * получить несколько этажей
 	 */
 	private ArrayList<Model> getFlats(Class<?> c, int count, float x, float y,
-			float z) {
+			float z, float stepZ) {
 		ArrayList<Model> ret = new ArrayList<Model>();
 		for (int i = 0; i < count; ++i) {
-			ret.add(new FlatCell(x, y + FlatCell.h * i, z, c));
+			ret.add(new FlatCell(x, y + FlatCell.h * i, z, c, stepZ));
 		}
 		return ret;
 	}
@@ -86,14 +89,10 @@ class MainHousePart extends SimpleModel {
 			float h = (i <= 3 ? flatH : 0);
 			Class<?> c = (i == cls.length - 1 ? cls[i] : WindowsBlock.class);
 			models.addAll(getFlats(cls[i], number, x + borderL + step * i, y
-					+ h, z));
+					+ h, z, 0.01f));
 			models.addAll(getFlats(c, number, x + borderL + step * i, y + h, z
-					- borderW - 1f - borderW));
+					- borderW - 1f - borderW, -0.01f));
 		}
-
-		// окна на левой стороне корпуса
-		// окна на правой стороне корпуса
-		// границы дома
 	}
 
 	/**
@@ -106,7 +105,5 @@ class MainHousePart extends SimpleModel {
 		for (Model m : models) {
 			m.display();
 		}
-		// рисуем границы дома
-		// рисуем бетонные полосы и синий низ
 	}
 }

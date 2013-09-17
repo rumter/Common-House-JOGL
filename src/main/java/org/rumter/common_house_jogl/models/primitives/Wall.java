@@ -1,6 +1,10 @@
-package org.rumter.common_house_jogl.utils;
+package org.rumter.common_house_jogl.models.primitives;
 
 import org.rumter.common_house_jogl.App;
+import org.rumter.common_house_jogl.geom.Plane;
+import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.utils.DrawUtils;
 
 import com.jogamp.opengl.util.texture.Texture;
 
@@ -14,6 +18,7 @@ public class Wall {
 	private float x1, z1, x2, z2, h;
 	private Texture wallTex;
 	private Point point1, point2, point3, point4, v1, v2;
+	private Quad quad;
 
 	public Wall(float x1, float z1, float x2, float z2, float h,
 			String textureFilePath) {
@@ -28,7 +33,9 @@ public class Wall {
 		point2 = point1.add(v1);
 		point3 = point1.add(v2);
 		point4 = point2.add(v2);
-		wallTex = App.TexUtils.factory(textureFilePath);
+		wallTex = App.texUtils.factory(textureFilePath);
+
+		quad = new Quad(point1, v1, v2);
 	}
 
 	public Wall(Point a, Point b, float h, String textureFilePath) {
@@ -64,9 +71,7 @@ public class Wall {
 	}
 
 	public void display() {
-		// GL2 gl = App.gl;
-		App.TexUtils.prepareForDisplay(wallTex);
-		DrawUtils.drawRectangleTex(point1, v1, v2,
-				DrawUtils.TEXTURE_MODE_REPEAT);
+		App.texUtils.prepareForDisplay(wallTex);
+		App.drawUtils.drawQuadTex(quad, DrawUtils.TEXTURE_MODE_REPEAT);
 	}
 }

@@ -1,8 +1,11 @@
-package org.rumter.common_house_jogl.models;
+package org.rumter.common_house_jogl.models.house;
 
 import java.util.ArrayList;
 
-import org.rumter.common_house_jogl.models.windows.FlatCell;
+import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.models.house.windows.FlatCell;
+import org.rumter.common_house_jogl.models.primitives.Block;
 
 /**
  * крыша общежития

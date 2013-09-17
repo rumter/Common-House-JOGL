@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils;
+package org.rumter.common_house_jogl.geom;
 
 /**
  * точка
@@ -83,6 +83,18 @@ public class Point implements Cloneable {
 		float newz = (float) (x * (float) Math.sin(alpha) + z
 				* (float) Math.cos(alpha));
 		return new Point(newx, y, newz);
+	}
+	
+	/**
+	 * повернуть вектор в плоскости YOZ
+	 */
+	public Point rotateYZ(float alpha) {
+		alpha = (float) Math.toRadians(alpha);
+		float newy = (float) (y * (float) Math.cos(alpha) - z
+				* (float) Math.sin(alpha));
+		float newz = (float) (y * (float) Math.sin(alpha) + z
+				* (float) Math.cos(alpha));
+		return new Point(x, newy, newz);
 	}
 
 	public Point clone() {

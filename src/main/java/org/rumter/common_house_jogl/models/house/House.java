@@ -1,4 +1,7 @@
-package org.rumter.common_house_jogl.models;
+package org.rumter.common_house_jogl.models.house;
+
+import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.models.base.SimpleModel;
 
 /**
  * корпус общежития
@@ -18,13 +21,12 @@ public class House extends SimpleModel {
 
 	public House(float x, float y, float z) {
 		super(x, y, z);
-
 		mainPart = new MainHousePart(x, y, z);
 		houseTop = new HouseTop(x, y, z);
 		bottomPart = new BottomHousePart(x, y, z);
 	}
 
-	public Model mainPart, houseTop, bottomPart;
+	private Model mainPart, houseTop, bottomPart;
 
 	@Override
 	public void display() {

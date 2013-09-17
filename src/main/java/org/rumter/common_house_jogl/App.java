@@ -25,9 +25,12 @@ import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
 
 import org.rumter.common_house_jogl.models.Map;
-import org.rumter.common_house_jogl.models.Model;
-import org.rumter.common_house_jogl.utils.Motion;
+import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.utils.DrawUtils;
+import org.rumter.common_house_jogl.utils.MotionManager;
 import org.rumter.common_house_jogl.utils.TextureUtils;
+import org.rumter.common_house_jogl.utils.light.LightManager;
+import org.rumter.common_house_jogl.utils.light.ShadowManager;
 
 import com.jogamp.opengl.util.Animator;
 
@@ -41,20 +44,24 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	public static Frame frame = new Frame("Jogl Common House");
 	public static Animator animator = new Animator(canvas);
 
-	public static TextureUtils TexUtils;
+	public static TextureUtils texUtils;
+	public static DrawUtils drawUtils;
+	public static MotionManager motionManager;
+	public static LightManager lightManager;
+	public static ShadowManager shadowManager;
 
 	public static Model world;
 
 	public static GL2 gl;
 
+	@Override
 	public void display(GLAutoDrawable gLDrawable) {
 		gl = gLDrawable.getGL().getGL2();
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
 		gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
 		gl.glLoadIdentity();
 
-		TexUtils = new TextureUtils();
-		Motion.getInstance().display();
+		motionManager.display();
 		world.display();
 	}
 
@@ -62,6 +69,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 			boolean deviceChanged) {
 	}
 
+	@Override
 	public void init(GLAutoDrawable gLDrawable) {
 		gl = gLDrawable.getGL().getGL2();
 		gl.glShadeModel(GLLightingFunc.GL_SMOOTH);
@@ -71,7 +79,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glDepthFunc(GL.GL_LEQUAL);
-		gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_FASTEST);
+		gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 
 		((Component) gLDrawable).addKeyListener(this);
 		((Component) gLDrawable).addMouseMotionListener(this);
@@ -80,9 +88,15 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 				cursorImage, new java.awt.Point(0, 0), "");
 		frame.setCursor(blankCursor);
 
+		texUtils = new TextureUtils();
+		drawUtils = new DrawUtils();
+		motionManager = new MotionManager();
+		lightManager = new LightManager();
+		shadowManager = new ShadowManager();
 		world = new Map(0, 0, 0);
 	}
 
+	@Override
 	public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width,
 			int height) {
 		GL2 gl = gLDrawable.getGL().getGL2();
@@ -97,28 +111,33 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		gl.glLoadIdentity();
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			exit();
 			break;
 		case KeyEvent.VK_UP:
-			Motion.getInstance().go();
+		case KeyEvent.VK_W:
+			motionManager.go();
 			break;
 		case KeyEvent.VK_DOWN:
-			Motion.getInstance().back();
+		case KeyEvent.VK_S:
+			motionManager.back();
 			break;
 		case KeyEvent.VK_RIGHT:
-			Motion.getInstance().right();
+		case KeyEvent.VK_D:
+			motionManager.right();
 			break;
 		case KeyEvent.VK_LEFT:
-			Motion.getInstance().left();
+		case KeyEvent.VK_A:
+			motionManager.left();
 			break;
 		case KeyEvent.VK_PAGE_UP:
-			Motion.getInstance().up();
+			motionManager.up();
 			break;
 		case KeyEvent.VK_PAGE_DOWN:
-			Motion.getInstance().down();
+			motionManager.down();
 			break;
 		default:
 			break;
@@ -143,8 +162,8 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent me) {
 		if (isMouseMove) {
-			Motion.getInstance().rotateHorizontal(me.getX() - mouseX);
-			Motion.getInstance().rotateVertical(me.getY() - mouseY);
+			motionManager.rotateHorizontal(me.getX() - mouseX);
+			motionManager.rotateVertical(me.getY() - mouseY);
 		}
 		mouseX = me.getX();
 		mouseY = me.getY();
@@ -173,6 +192,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		canvas.requestFocus();
 	}
 
+	@Override
 	public void dispose(GLAutoDrawable gLDrawable) {
 		// do nothing
 	}

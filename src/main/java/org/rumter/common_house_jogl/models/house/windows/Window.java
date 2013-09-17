@@ -1,6 +1,6 @@
-package org.rumter.common_house_jogl.models.windows;
+package org.rumter.common_house_jogl.models.house.windows;
 
-import org.rumter.common_house_jogl.models.SimpleModel;
+import org.rumter.common_house_jogl.models.base.SimpleModel;
 
 /**
  * окно

@@ -64,10 +64,14 @@ public final class TextureUtils {
 	 */
 	public void prepareForDisplay(Texture tex) {
 		GL2 gl = App.gl;
-		float[] rgba = { 1f, 1f, 1f };
-		gl.glMaterialfv(GL.GL_FRONT, GL2.GL_AMBIENT, rgba, 0);
-		gl.glMaterialfv(GL.GL_FRONT, GL2.GL_SPECULAR, rgba, 0);
-		gl.glMaterialf(GL.GL_FRONT, GL2.GL_SHININESS, 0.5f);
+
+		float[] white = { 1f, 1f, 1f };
+		float[] black = { 1f, 1f, 1f };
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, white, 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, white, 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, white, 0);
+		gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 4);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, black, 0);
 
 		tex.enable(gl);
 		tex.bind(gl);

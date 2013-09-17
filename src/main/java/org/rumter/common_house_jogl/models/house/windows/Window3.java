@@ -1,8 +1,9 @@
-package org.rumter.common_house_jogl.models.windows;
+package org.rumter.common_house_jogl.models.house.windows;
 
 import org.rumter.common_house_jogl.App;
+import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.geom.Quad;
 import org.rumter.common_house_jogl.utils.DrawUtils;
-import org.rumter.common_house_jogl.utils.Point;
 
 /**
  * Окно с тремя окнами
@@ -57,7 +58,7 @@ public class Window3 extends Window {
 		return l - w2 - w2;
 	}
 
-	public Window3(float x, float y, float z) {
+	public Window3(float x, float y, float z, float stepZ) {
 		super(x, y, z);
 
 		vw = new Point[] { new Point(x, y, z), new Point(l, 0, 0),
@@ -71,23 +72,26 @@ public class Window3 extends Window {
 
 		vg3 = new Point[] { new Point(x + l - w2 - gl1, y + w1, z),
 				new Point(gl1, 0, 0), new Point(0, gh, 0) };
+
+		window = new Quad(vw[0], vw[1], vw[2]).moveZ(stepZ);
+		glass1 = new Quad(vg1[0], vg1[1], vg1[2]).moveZ(stepZ * 2);
+		glass2 = new Quad(vg2[0], vg2[1], vg2[2]).moveZ(stepZ * 2);
+		glass3 = new Quad(vg3[0], vg3[1], vg3[2]).moveZ(stepZ * 2);
 	}
 
 	private Point[] vw, vg1, vg2, vg3;
 
+	private Quad window, glass1, glass2, glass3;
+
 	@Override
 	public void display() {
 		// всё окно
-		App.TexUtils.prepareForDisplay("window");
-		DrawUtils.drawRectangleTex(vw[0], vw[1], vw[2],
-				DrawUtils.TEXTURE_MODE_REPEAT);
+		App.texUtils.prepareForDisplay("window");
+		App.drawUtils.drawQuadTex(window, DrawUtils.TEXTURE_MODE_REPEAT);
 		// стёкла
-		App.TexUtils.prepareForDisplay("glass");
-		DrawUtils.drawRectangleTex(vg1[0], vg1[1], vg1[2],
-				DrawUtils.TEXTURE_MODE_REPEAT);
-		DrawUtils.drawRectangleTex(vg2[0], vg2[1], vg2[2],
-				DrawUtils.TEXTURE_MODE_REPEAT);
-		DrawUtils.drawRectangleTex(vg3[0], vg3[1], vg3[2],
-				DrawUtils.TEXTURE_MODE_REPEAT);
+		App.texUtils.prepareForDisplay("glass");
+		App.drawUtils.drawQuadTex(glass1, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(glass2, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(glass3, DrawUtils.TEXTURE_MODE_REPEAT);
 	}
 }

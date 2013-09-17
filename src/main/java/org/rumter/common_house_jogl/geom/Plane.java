@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils;
+package org.rumter.common_house_jogl.geom;
 
 /**
  * плоскость

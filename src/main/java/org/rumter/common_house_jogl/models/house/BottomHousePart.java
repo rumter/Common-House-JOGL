@@ -1,12 +1,16 @@
-package org.rumter.common_house_jogl.models;
+package org.rumter.common_house_jogl.models.house;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import org.rumter.common_house_jogl.models.windows.FlatCell;
-import org.rumter.common_house_jogl.models.windows.Window3;
-import org.rumter.common_house_jogl.utils.DrawUtils;
-import org.rumter.common_house_jogl.utils.Point;
+import org.rumter.common_house_jogl.App;
+import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.models.house.windows.FlatCell;
+import org.rumter.common_house_jogl.models.house.windows.Window3;
+import org.rumter.common_house_jogl.models.primitives.Block;
 
 /**
  * Вход и столовая
@@ -58,22 +62,27 @@ class BottomHousePart extends SimpleModel {
 		p3 = new Point(x + 18f, y + h1, z + 1f);
 
 		// окна
-		models.add(new Window3(x + 4f, y + h1 + 0.2f, z));
-		models.add(new Window3(x + 20f, y + h1 + 0.2f, z));
+		models.add(new Window3(x + 4f, y + h1 + 0.2f, z, 0.01f));
+		models.add(new Window3(x + 20f, y + h1 + 0.2f, z, 0.01f));
+
+		// дверь
+		doorQuad = new Quad(new Point(x + 12f, y + h1, z + 0.01f), new Point(0,
+				2.5f, 0.01f), new Point(4f, 0, 0.01f));
 	}
 
 	private ArrayList<Model> models;
+
+	private Quad doorQuad;
 
 	@Override
 	public void display() {
 		for (Model m : models) {
 			m.display();
 		}
-		org.rumter.common_house_jogl.App.TexUtils.prepareForDisplay("doors");
-		DrawUtils.drawRectangleTex(new Point(x + 12f, y + h1, z), new Point(0,
-				2.5f, 0), new Point(4f, 0, 0), 512, 322, 512);
-		DrawUtils.drawCilynder(Color.green, p1, 0.5f, h - h1 - h2 + 0.2f);
-		DrawUtils.drawCilynder(Color.green, p2, 0.5f, h - h1 - h2 + 0.2f);
-		DrawUtils.drawCilynder(Color.green, p3, 0.5f, h - h1 - h2 + 0.2f);
+		App.texUtils.prepareForDisplay("doors");
+		App.drawUtils.drawQuadTex(doorQuad, 512, 322, 512);
+		App.drawUtils.drawCylinder(Color.green, p1, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawCylinder(Color.green, p2, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawCylinder(Color.green, p3, 0.5f, h - h1 - h2 + 0.2f);
 	}
 }

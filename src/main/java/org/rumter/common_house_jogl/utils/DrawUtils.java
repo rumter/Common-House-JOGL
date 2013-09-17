@@ -2,10 +2,13 @@ package org.rumter.common_house_jogl.utils;
 
 import java.awt.Color;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLUquadric;
 
 import org.rumter.common_house_jogl.App;
+import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.geom.Quad;
 
 /**
  * методы для рисования
@@ -14,81 +17,73 @@ import org.rumter.common_house_jogl.App;
  * @email rumtery@yandex.ru
  */
 public class DrawUtils {
-	private static void drawPoint(Point p) {
-		GL2 gl = App.gl;
-		gl.glVertex3f(p.x, p.y, p.z);
+
+	public DrawUtils() {
 	}
 
-	public static void drawRectangle(Color c, Point p, Point v1, Point v2) {
+	public void drawQuad(Color c, Quad q) {
 		GL2 gl = App.gl;
-		if (isShadow()) {
+		if (App.shadowManager.isShadowMode()) {
 			c = Color.BLACK;
 		}
+		float[] cv = { c.getRed(), c.getGreen(), c.getBlue(), 0.0f };
+		float[] black = { 0f, 0f, 0f };
 		gl.glBegin(GL2.GL_QUADS);
-		float[] v = { c.getRed(), c.getGreen(), c.getBlue(), 0.0f };
-		gl.glColor3fv(v, 0);
-		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, v, 0);
-		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, v, 0);
-		drawPoint(p);
-		drawPoint(p.add(v1));
-		drawPoint(p.add(v1).add(v2));
-		drawPoint(p.add(v2));
+		gl.glColor3fv(cv, 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, cv, 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, cv, 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, cv, 0);
+		gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 4);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, black, 0);
+		float[][] vertex = q.getVertexArray();
+		for (int i = 0; i < vertex.length; ++i) {
+			gl.glVertex3fv(vertex[i], 0);
+		}
 		gl.glEnd();
 	}
 
-	public static int TEXTURE_MODE_REPEAT = 0;
-	public static int TEXTURE_MODE_STRETCH = 1;
+	public static final int TEXTURE_MODE_REPEAT = 0;
+	public static final int TEXTURE_MODE_STRETCH = 1;
 
-	public static void drawRectangleTex(Point p, Point v1, Point v2, int mode) {
+	private void drawTex(Quad q, float w, float h) {
 		GL2 gl = App.gl;
-		if (isShadow()) {
-			drawRectangle(Color.BLACK, p, v1, v2);
-			return;
-		}
-		float dw = v2.distance();
-		float dh = v1.distance();
-		float w = 1.0f;
-		float h = 1.0f;
-		if (mode == TEXTURE_MODE_REPEAT) {
-			w = dw;
-			h = dh;
-		}
 		gl.glBegin(GL2.GL_QUADS);
 		gl.glTexCoord2f(0.0f, 0.0f);
-		drawPoint(p);
+		gl.glVertex3fv(q.getVertexArray()[0], 0);
 		gl.glTexCoord2f(0.0f, h);
-		drawPoint(p.add(v1));
+		gl.glVertex3fv(q.getVertexArray()[1], 0);
 		gl.glTexCoord2f(w, h);
-		drawPoint(p.add(v1).add(v2));
+		gl.glVertex3fv(q.getVertexArray()[2], 0);
 		gl.glTexCoord2f(w, 0.0f);
-		drawPoint(p.add(v2));
+		gl.glVertex3fv(q.getVertexArray()[3], 0);
 		gl.glEnd();
 	}
 
-	public static void drawRectangleTex(Point p, Point v1, Point v2, int width,
-			int height, int length) {
-		GL2 gl = App.gl;
-		if (isShadow()) {
-			drawRectangle(Color.BLACK, p, v1, v2);
-			return;
+	public void drawQuadTex(Quad q, int mode) {
+		if (App.shadowManager.isShadowMode()) {
+			drawQuad(Color.BLACK, q);
+		} else {
+			if (mode == TEXTURE_MODE_REPEAT) {
+				drawTex(q, q.getW(), q.getH());
+			} else {
+				drawTex(q, 1.0f, 1.0f);
+			}
 		}
-		float w = (float) ((float) width / (float) length);
-		float h = (float) ((float) height / (float) length);
-		gl.glBegin(GL2.GL_QUADS);
-		gl.glTexCoord2f(0.0f, 0.0f);
-		drawPoint(p);
-		gl.glTexCoord2f(0.0f, h);
-		drawPoint(p.add(v1));
-		gl.glTexCoord2f(w, h);
-		drawPoint(p.add(v1).add(v2));
-		gl.glTexCoord2f(w, 0.0f);
-		drawPoint(p.add(v2));
-		gl.glEnd();
 	}
 
-	public static void drawCilynder(Color c, Point p, float r, float h) {
+	public void drawQuadTex(Quad q, int width, int height, int length) {
+		if (App.shadowManager.isShadowMode()) {
+			drawQuad(Color.BLACK, q);
+		} else {
+			float w = (float) ((float) width / (float) length);
+			float h = (float) ((float) height / (float) length);
+			drawTex(q, w, h);
+		}
+	}
+
+	public void drawCylinder(Color c, Point p, float r, float h) {
 		GL2 gl = App.gl;
-		if (isShadow()) {
+		if (App.shadowManager.isShadowMode()) {
 			c = Color.BLACK;
 		}
 		gl.glPushMatrix();
@@ -100,9 +95,9 @@ public class DrawUtils {
 		gl.glPopMatrix();
 	}
 
-	public static void drawSphere(Color c, Point p, float r) {
+	public void drawSphere(Color c, Point p, float r) {
 		GL2 gl = App.gl;
-		if (isShadow()) {
+		if (App.shadowManager.isShadowMode()) {
 			c = Color.BLACK;
 		}
 		gl.glPushMatrix();
@@ -113,13 +108,4 @@ public class DrawUtils {
 		gl.glPopMatrix();
 	}
 
-	private static boolean shadow = false;
-
-	public static boolean isShadow() {
-		return shadow;
-	}
-
-	public static void setShadow(boolean shadowValue) {
-		shadow = shadowValue;
-	}
 }
