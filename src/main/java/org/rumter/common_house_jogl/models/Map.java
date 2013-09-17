@@ -30,15 +30,15 @@ public class Map extends SimpleModel {
 		house = new House(x - 4.4f, y, z - 145.2f);
 		walls = house.getWalls();
 		App.lightManager.initLight0(new Point(x, y, z));
-		App.shadowManager.initShadowMatrix(App.lightManager.getPosition0());
+		// App.shadowManager.initShadowMatrix(App.lightManager.getPosition0());
 	}
 
 	@Override
 	public void display() {
-		App.shadowManager.beginDrawShadow();
-		drawScene();
-		App.shadowManager.endDrawShadow();
-
+		/*
+		 * App.shadowManager.beginDrawShadow(); drawScene();
+		 * App.shadowManager.endDrawShadow();
+		 */
 		drawScene();
 	}
 

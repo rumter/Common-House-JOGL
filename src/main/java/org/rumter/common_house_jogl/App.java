@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -54,6 +55,8 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 
 	public static GL2 gl;
 
+	private static ArrayList<Long> t = new ArrayList<Long>();
+
 	@Override
 	public void display(GLAutoDrawable gLDrawable) {
 		gl = gLDrawable.getGL().getGL2();
@@ -61,8 +64,10 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
 		gl.glLoadIdentity();
 
+		long t1 = System.currentTimeMillis();
 		motionManager.display();
 		world.display();
+		t.add(System.currentTimeMillis() - t1);
 	}
 
 	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged,
@@ -171,6 +176,23 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	}
 
 	public static void exit() {
+		Long sum = 0L;
+		Long cnt = 0L;
+		for (Long _t : t) {
+			sum += _t;
+			++cnt;
+		}
+		long result = 0;
+		if (cnt > 0) {
+			result = sum / cnt;
+		}
+		System.out.println("average display time = " + result + "ms");
+		System.out.println("memory used = "
+				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
+						.freeMemory()) / 1024 / 1024) + "MB");
+		// average display time = 308ms
+		// memory used = 20MB
+
 		animator.stop();
 		frame.dispose();
 		System.exit(0);
