@@ -1,6 +1,5 @@
 package org.rumter.common_house_jogl.models.house;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import org.rumter.common_house_jogl.App;
@@ -11,7 +10,7 @@ import org.rumter.common_house_jogl.models.base.SimpleModel;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
 import org.rumter.common_house_jogl.models.house.windows.Window3;
 import org.rumter.common_house_jogl.models.primitives.Block;
-import org.rumter.common_house_jogl.utils.DrawUtils;
+import org.rumter.common_house_jogl.utils.draw.TextureUtils.TextureMode;
 
 /**
  * Вход и столовая
@@ -85,11 +84,12 @@ class BottomHousePart extends SimpleModel {
 			m.display();
 		}
 		App.texUtils.prepareForDisplay("doors");
-		App.drawUtils.drawQuadTex(doorQuad, DrawUtils.TEXTURE_MODE_STRETCH);
+		App.drawUtils.drawQuadTex(doorQuad, TextureMode.STRETCH);
 		App.texUtils.prepareForDisplay("title8");
-		App.drawUtils.drawQuadTex(titleQuad, DrawUtils.TEXTURE_MODE_STRETCH);
-		App.drawUtils.drawCylinder(Color.green, p1, 0.5f, h - h1 - h2 + 0.2f);
-		App.drawUtils.drawCylinder(Color.green, p2, 0.5f, h - h1 - h2 + 0.2f);
-		App.drawUtils.drawCylinder(Color.green, p3, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawQuadTex(titleQuad, TextureMode.STRETCH);
+		App.texUtils.prepareForDisplay("cylinder");
+		App.drawUtils.drawCylinder(p1, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawCylinder(p2, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawCylinder(p3, 0.5f, h - h1 - h2 + 0.2f);
 	}
 }

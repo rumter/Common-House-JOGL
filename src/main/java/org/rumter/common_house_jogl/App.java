@@ -27,9 +27,9 @@ import javax.media.opengl.glu.GLU;
 
 import org.rumter.common_house_jogl.models.Map;
 import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 import org.rumter.common_house_jogl.utils.MotionManager;
-import org.rumter.common_house_jogl.utils.TextureUtils;
+import org.rumter.common_house_jogl.utils.draw.DrawUtils;
+import org.rumter.common_house_jogl.utils.draw.TextureUtils;
 import org.rumter.common_house_jogl.utils.light.LightManager;
 import org.rumter.common_house_jogl.utils.light.ShadowManager;
 
@@ -190,8 +190,8 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		System.out.println("memory used = "
 				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
 						.freeMemory()) / 1024 / 1024) + "MB");
-		// average display time = 308ms
-		// memory used = 20MB
+		// average display time = 140ms
+		// memory used = 65MB
 
 		animator.stop();
 		frame.dispose();

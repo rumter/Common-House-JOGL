@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils;
+package org.rumter.common_house_jogl.utils.draw;
 
 import java.awt.Color;
 
@@ -9,6 +9,8 @@ import javax.media.opengl.glu.GLUquadric;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.utils.draw.TextureUtils.TextureMode;
+import org.rumter.common_house_jogl.utils.light.ShadowManager;
 
 /**
  * методы для рисования
@@ -21,8 +23,17 @@ public class DrawUtils {
 	public DrawUtils() {
 	}
 
-	public static final int TEXTURE_MODE_REPEAT = 0;
-	public static final int TEXTURE_MODE_STRETCH = 1;
+	public void setMaterial(Material m) {
+		GL2 gl = App.gl;
+		gl.glColor3fv(m.getDiffuse(), 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, m.getAmbient(), 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, m.getDiffuse(), 0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, m.getSpecular(),
+				0);
+		gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, m.getShininess());
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, m.getEmission(),
+				0);
+	}
 
 	private void drawTex(Quad q, float w, float h) {
 		GL2 gl = App.gl;
@@ -38,32 +49,25 @@ public class DrawUtils {
 		gl.glEnd();
 	}
 
-	public void drawQuad(Color c, Quad q) {
+	public void drawQuad(Quad q, Color c) {
 		GL2 gl = App.gl;
 		if (App.shadowManager.isShadowMode()) {
-			c = Color.BLACK;
+			c = ShadowManager.SHADOW_COLOR;
 		}
-		float[] cv = { c.getRed(), c.getGreen(), c.getBlue(), 0.0f };
-		float[] black = { 0f, 0f, 0f };
+		setMaterial(Material.factorySimpleMaterial(c));
 		gl.glBegin(GL2.GL_QUADS);
-		gl.glColor3fv(cv, 0);
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, cv, 0);
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, cv, 0);
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, cv, 0);
-		gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 4);
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, black, 0);
-		float[][] vertex = q.getVertexArray();
-		for (int i = 0; i < vertex.length; ++i) {
-			gl.glVertex3fv(vertex[i], 0);
-		}
+		gl.glVertex3fv(q.getVertexArray()[0], 0);
+		gl.glVertex3fv(q.getVertexArray()[1], 0);
+		gl.glVertex3fv(q.getVertexArray()[2], 0);
+		gl.glVertex3fv(q.getVertexArray()[3], 0);
 		gl.glEnd();
 	}
 
-	public void drawQuadTex(Quad q, int mode) {
+	public void drawQuadTex(Quad q, TextureMode mode) {
 		if (App.shadowManager.isShadowMode()) {
-			drawQuad(Color.BLACK, q);
+			drawQuad(q, ShadowManager.SHADOW_COLOR);
 		} else {
-			if (mode == TEXTURE_MODE_REPEAT) {
+			if (mode == TextureMode.REPEAT) {
 				drawTex(q, q.getW(), q.getH());
 			} else {
 				drawTex(q, 1.0f, 1.0f);
@@ -71,16 +75,17 @@ public class DrawUtils {
 		}
 	}
 
-	public void drawCylinder(Color c, Point p, float r, float h) {
+	public void drawQuadTex(Quad q) {
+		drawQuadTex(q, TextureMode.REPEAT);
+	}
+
+	public void drawCylinder(Point p, float r, float h) {
 		GL2 gl = App.gl;
-		if (App.shadowManager.isShadowMode()) {
-			c = Color.BLACK;
-		}
 		gl.glPushMatrix();
 		gl.glTranslatef(p.x, p.y + h, p.z);
 		gl.glRotatef(90, 1, 0, 0);
-		gl.glColor3f(c.getRed(), c.getGreen(), c.getBlue());
 		GLUquadric glq = App.glu.gluNewQuadric();
+		App.glu.gluQuadricTexture(glq, true);
 		App.glu.gluCylinder(glq, r, r, h, 20, 20);
 		gl.glPopMatrix();
 	}

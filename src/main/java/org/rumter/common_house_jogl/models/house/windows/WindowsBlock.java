@@ -3,7 +3,6 @@ package org.rumter.common_house_jogl.models.house.windows;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * Блок из двух окон
@@ -94,8 +93,8 @@ public class WindowsBlock extends Window {
 
 	protected void drawIndents() {
 		App.texUtils.prepareForDisplay("indent");
-		App.drawUtils.drawQuadTex(indent1, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(indent2, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(indent1);
+		App.drawUtils.drawQuadTex(indent2);
 	}
 
 	/**
@@ -105,7 +104,7 @@ public class WindowsBlock extends Window {
 
 	protected void drawSeparator() {
 		App.texUtils.prepareForDisplay("window");
-		App.drawUtils.drawQuadTex(separator, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(separator);
 	}
 
 	/**
@@ -116,8 +115,7 @@ public class WindowsBlock extends Window {
 	protected void drawSill() {
 		App.texUtils.prepareForDisplay("window");
 		for (int i = 0; i < sillQuads.length; ++i) {
-			App.drawUtils.drawQuadTex(sillQuads[i],
-					DrawUtils.TEXTURE_MODE_REPEAT);
+			App.drawUtils.drawQuadTex(sillQuads[i]);
 		}
 	}
 

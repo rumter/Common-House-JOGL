@@ -47,7 +47,7 @@ public class Map extends SimpleModel {
 		house.display();
 		if (!App.shadowManager.isShadowMode()) {
 			App.texUtils.prepareForDisplay("window");
-			App.drawUtils.drawQuad(Color.white, ground);
+			App.drawUtils.drawQuad(ground, Color.white);
 		}
 	}
 

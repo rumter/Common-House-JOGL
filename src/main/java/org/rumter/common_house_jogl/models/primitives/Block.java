@@ -6,7 +6,6 @@ import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
 import org.rumter.common_house_jogl.models.base.SimpleModel;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * Блок
@@ -53,11 +52,11 @@ public class Block extends SimpleModel {
 	@Override
 	public void display() {
 		App.texUtils.prepareForDisplay(texture);
-		App.drawUtils.drawQuadTex(frontSide, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(backSide, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(leftSide, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(rightSide, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuad(sideColor, topSide);
-		App.drawUtils.drawQuad(sideColor, bottomSide);
+		App.drawUtils.drawQuadTex(frontSide);
+		App.drawUtils.drawQuadTex(backSide);
+		App.drawUtils.drawQuadTex(leftSide);
+		App.drawUtils.drawQuadTex(rightSide);
+		App.drawUtils.drawQuad(topSide, sideColor);
+		App.drawUtils.drawQuad(bottomSide, sideColor);
 	}
 }

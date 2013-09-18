@@ -6,7 +6,6 @@ import java.util.List;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * окно wash room
@@ -83,8 +82,7 @@ public class WashRoomWindow extends WindowsBlock {
 		// окна
 		for (int i = 0; i < quads.size(); ++i) {
 			App.texUtils.prepareForDisplay(quadTex.get(i));
-			App.drawUtils.drawQuadTex(quads.get(i),
-					DrawUtils.TEXTURE_MODE_REPEAT);
+			App.drawUtils.drawQuadTex(quads.get(i));
 		}
 		// подоконник
 		drawSill();

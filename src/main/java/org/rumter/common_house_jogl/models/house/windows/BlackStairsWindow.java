@@ -3,7 +3,6 @@ package org.rumter.common_house_jogl.models.house.windows;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * окно напротив чёрной лестницы
@@ -65,10 +64,10 @@ public class BlackStairsWindow extends Window {
 	@Override
 	public void display() {
 		App.texUtils.prepareForDisplay("window");
-		App.drawUtils.drawQuadTex(window1, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(window1);
 		App.texUtils.prepareForDisplay("glass");
-		App.drawUtils.drawQuadTex(glass, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(glass);
 		App.texUtils.prepareForDisplay("window");
-		App.drawUtils.drawQuadTex(window2, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(window2);
 	}
 }

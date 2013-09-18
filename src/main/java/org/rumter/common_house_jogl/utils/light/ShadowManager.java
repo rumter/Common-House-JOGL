@@ -1,5 +1,7 @@
 package org.rumter.common_house_jogl.utils.light;
 
+import java.awt.Color;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
@@ -11,6 +13,10 @@ public class ShadowManager {
 	private float[] shadowMatrix;
 
 	private boolean isShadowMode = false;
+
+	public static final Color SHADOW_COLOR = new Color(0f, 0f, 0f, 0.9f);
+	public static final float[] SHADOW_COLOR_fv = new float[] { 0f, 0f, 0f,
+			0.9f };
 
 	public ShadowManager() {
 	}
@@ -28,7 +34,7 @@ public class ShadowManager {
 		gl.glEnable(GL.GL_BLEND);
 		gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_DST_ALPHA);
 		gl.glDisable(GLLightingFunc.GL_LIGHTING);
-		gl.glColor4f(0f, 0f, 0f, 0.9f);
+		gl.glColor4fv(SHADOW_COLOR_fv, 0);
 		gl.glPushMatrix();
 		gl.glTranslatef(0, 0.01f, 0);
 		this.isShadowMode = true;

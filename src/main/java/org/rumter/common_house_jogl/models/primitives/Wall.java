@@ -4,7 +4,6 @@ import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Plane;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 import com.jogamp.opengl.util.texture.Texture;
 
@@ -72,6 +71,6 @@ public class Wall {
 
 	public void display() {
 		App.texUtils.prepareForDisplay(wallTex);
-		App.drawUtils.drawQuadTex(quad, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(quad);
 	}
 }

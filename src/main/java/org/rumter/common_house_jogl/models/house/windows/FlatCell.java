@@ -4,7 +4,6 @@ import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
 import org.rumter.common_house_jogl.models.base.SimpleModel;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * ячейка этажа
@@ -73,7 +72,7 @@ public class FlatCell extends SimpleModel {
 			} else {
 				App.texUtils.prepareForDisplay("blueLineBottom");
 			}
-			App.drawUtils.drawQuadTex(blueLine, DrawUtils.TEXTURE_MODE_REPEAT);
+			App.drawUtils.drawQuadTex(blueLine);
 		}
 	}
 
@@ -85,7 +84,7 @@ public class FlatCell extends SimpleModel {
 	public void drawWhiteLine() {
 		// if ( ! isMainStairsWindow) {
 		App.texUtils.prepareForDisplay("whiteLine");
-		App.drawUtils.drawQuadTex(whiteLine, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(whiteLine);
 		// }
 	}
 

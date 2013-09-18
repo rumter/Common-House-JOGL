@@ -3,7 +3,6 @@ package org.rumter.common_house_jogl.models.house.windows;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.geom.Point;
 import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * Окно с тремя окнами
@@ -87,11 +86,11 @@ public class Window3 extends Window {
 	public void display() {
 		// всё окно
 		App.texUtils.prepareForDisplay("window");
-		App.drawUtils.drawQuadTex(window, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(window);
 		// стёкла
 		App.texUtils.prepareForDisplay("glass");
-		App.drawUtils.drawQuadTex(glass1, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(glass2, DrawUtils.TEXTURE_MODE_REPEAT);
-		App.drawUtils.drawQuadTex(glass3, DrawUtils.TEXTURE_MODE_REPEAT);
+		App.drawUtils.drawQuadTex(glass1);
+		App.drawUtils.drawQuadTex(glass2);
+		App.drawUtils.drawQuadTex(glass3);
 	}
 }
