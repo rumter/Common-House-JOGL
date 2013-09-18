@@ -11,6 +11,7 @@ import org.rumter.common_house_jogl.models.base.SimpleModel;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
 import org.rumter.common_house_jogl.models.house.windows.Window3;
 import org.rumter.common_house_jogl.models.primitives.Block;
+import org.rumter.common_house_jogl.utils.DrawUtils;
 
 /**
  * Вход и столовая
@@ -68,11 +69,15 @@ class BottomHousePart extends SimpleModel {
 		// дверь
 		doorQuad = new Quad(new Point(x + 12f, y + h1, z + 0.01f), new Point(0,
 				2.5f, 0.01f), new Point(4f, 0, 0.01f));
+
+		// табличка над общагой
+		titleQuad = new Quad(new Point(x + 10.5f, y + h - h1 + 0.05f, z + az
+				+ 0.01f), new Point(0, h1, 0), new Point(6f, 0, 0));
 	}
 
 	private ArrayList<Model> models;
 
-	private Quad doorQuad;
+	private Quad doorQuad, titleQuad;
 
 	@Override
 	public void display() {
@@ -80,7 +85,9 @@ class BottomHousePart extends SimpleModel {
 			m.display();
 		}
 		App.texUtils.prepareForDisplay("doors");
-		App.drawUtils.drawQuadTex(doorQuad, 512, 322, 512);
+		App.drawUtils.drawQuadTex(doorQuad, DrawUtils.TEXTURE_MODE_STRETCH);
+		App.texUtils.prepareForDisplay("title8");
+		App.drawUtils.drawQuadTex(titleQuad, DrawUtils.TEXTURE_MODE_STRETCH);
 		App.drawUtils.drawCylinder(Color.green, p1, 0.5f, h - h1 - h2 + 0.2f);
 		App.drawUtils.drawCylinder(Color.green, p2, 0.5f, h - h1 - h2 + 0.2f);
 		App.drawUtils.drawCylinder(Color.green, p3, 0.5f, h - h1 - h2 + 0.2f);

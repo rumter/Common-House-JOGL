@@ -21,6 +21,23 @@ public class DrawUtils {
 	public DrawUtils() {
 	}
 
+	public static final int TEXTURE_MODE_REPEAT = 0;
+	public static final int TEXTURE_MODE_STRETCH = 1;
+
+	private void drawTex(Quad q, float w, float h) {
+		GL2 gl = App.gl;
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glTexCoord2f(0.0f, 0.0f);
+		gl.glVertex3fv(q.getVertexArray()[0], 0);
+		gl.glTexCoord2f(0.0f, h);
+		gl.glVertex3fv(q.getVertexArray()[1], 0);
+		gl.glTexCoord2f(w, h);
+		gl.glVertex3fv(q.getVertexArray()[2], 0);
+		gl.glTexCoord2f(w, 0.0f);
+		gl.glVertex3fv(q.getVertexArray()[3], 0);
+		gl.glEnd();
+	}
+
 	public void drawQuad(Color c, Quad q) {
 		GL2 gl = App.gl;
 		if (App.shadowManager.isShadowMode()) {
@@ -42,23 +59,6 @@ public class DrawUtils {
 		gl.glEnd();
 	}
 
-	public static final int TEXTURE_MODE_REPEAT = 0;
-	public static final int TEXTURE_MODE_STRETCH = 1;
-
-	private void drawTex(Quad q, float w, float h) {
-		GL2 gl = App.gl;
-		gl.glBegin(GL2.GL_QUADS);
-		gl.glTexCoord2f(0.0f, 0.0f);
-		gl.glVertex3fv(q.getVertexArray()[0], 0);
-		gl.glTexCoord2f(0.0f, h);
-		gl.glVertex3fv(q.getVertexArray()[1], 0);
-		gl.glTexCoord2f(w, h);
-		gl.glVertex3fv(q.getVertexArray()[2], 0);
-		gl.glTexCoord2f(w, 0.0f);
-		gl.glVertex3fv(q.getVertexArray()[3], 0);
-		gl.glEnd();
-	}
-
 	public void drawQuadTex(Quad q, int mode) {
 		if (App.shadowManager.isShadowMode()) {
 			drawQuad(Color.BLACK, q);
@@ -68,16 +68,6 @@ public class DrawUtils {
 			} else {
 				drawTex(q, 1.0f, 1.0f);
 			}
-		}
-	}
-
-	public void drawQuadTex(Quad q, int width, int height, int length) {
-		if (App.shadowManager.isShadowMode()) {
-			drawQuad(Color.BLACK, q);
-		} else {
-			float w = (float) ((float) width / (float) length);
-			float h = (float) ((float) height / (float) length);
-			drawTex(q, w, h);
 		}
 	}
 

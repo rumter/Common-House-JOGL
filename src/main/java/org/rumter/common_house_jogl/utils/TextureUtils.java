@@ -24,7 +24,7 @@ public final class TextureUtils {
 	public TextureUtils() {
 		String allTex[] = { "glass", "window", "indent", "bricks", "quad",
 				"quadBg", "blueLine", "whiteLine", "kr1", "beton", "build1",
-				"build2", "houseTop", "betonLine", "blueLineBottom", "doors" };
+				"build2", "houseTop", "betonLine", "blueLineBottom", "doors", "title8" };
 		mapTex = new TreeMap<>();
 		for (String s : allTex) {
 			mapTex.put(s, factory(s));
