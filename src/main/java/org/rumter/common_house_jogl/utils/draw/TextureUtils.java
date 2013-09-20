@@ -31,10 +31,10 @@ public final class TextureUtils {
 	private String currentTexStr = "";
 
 	public TextureUtils() {
-		String allTex[] = { "glass", "window", "indent", "bricks", "quad",
-				"quadBg", "blueLine", "whiteLine", "kr1", "beton", "build1",
-				"build2", "houseTop", "betonLine", "blueLineBottom", "doors",
-				"title8", "cylinder" };
+		String allTex[] = { "glass", "window", "indent", "bricks", "quad", "quadBg", "blueLine", "whiteLine", "kr1",
+				"beton", "build1", "build2", "houseTop", "betonLine", "blueLineBottom", "doors", "title8", "cylinder",
+				"WashRoomWindow", "MainStairsWindow", "WindowsBlock", "WindowsBlock2", "BlackStairsWindow",
+				"BlackStairsWindow2" };
 		mapTex = new TreeMap<>();
 		for (String s : allTex) {
 			Texture tex = factory(s);
@@ -60,10 +60,8 @@ public final class TextureUtils {
 	 */
 	public Texture factory(String filePath) {
 		try {
-			InputStream stream = getClass().getResourceAsStream(
-					"/tex/" + filePath + ".png");
-			TextureData data = TextureIO.newTextureData(App.glp, stream, false,
-					"png");
+			InputStream stream = getClass().getResourceAsStream("/tex/" + filePath + ".png");
+			TextureData data = TextureIO.newTextureData(App.glp, stream, false, "png");
 			return TextureIO.newTexture(data);
 		} catch (IOException exc) {
 			System.out.println("Texture not found: " + filePath);

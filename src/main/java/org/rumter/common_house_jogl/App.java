@@ -70,8 +70,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		t.add(System.currentTimeMillis() - t1);
 	}
 
-	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged,
-			boolean deviceChanged) {
+	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {
 	}
 
 	@Override
@@ -89,8 +88,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		((Component) gLDrawable).addKeyListener(this);
 		((Component) gLDrawable).addMouseMotionListener(this);
 		Image cursorImage = Toolkit.getDefaultToolkit().getImage("xparent.gif");
-		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
-				cursorImage, new java.awt.Point(0, 0), "");
+		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new java.awt.Point(0, 0), "");
 		frame.setCursor(blankCursor);
 
 		texUtils = new TextureUtils();
@@ -102,8 +100,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	}
 
 	@Override
-	public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width,
-			int height) {
+	public void reshape(GLAutoDrawable gLDrawable, int x, int y, int width, int height) {
 		GL2 gl = gLDrawable.getGL().getGL2();
 		if (height <= 0) {
 			height = 1;
@@ -188,10 +185,9 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		}
 		System.out.println("average display time = " + result + "ms");
 		System.out.println("memory used = "
-				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
-						.freeMemory()) / 1024 / 1024) + "MB");
-		// average display time = 140ms
-		// memory used = 65MB
+				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024) + "MB");
+		// average display time = 16ms
+		// memory used = 30MB
 
 		animator.stop();
 		frame.dispose();

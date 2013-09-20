@@ -28,11 +28,9 @@ public class DrawUtils {
 		gl.glColor3fv(m.getDiffuse(), 0);
 		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_AMBIENT, m.getAmbient(), 0);
 		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_DIFFUSE, m.getDiffuse(), 0);
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, m.getSpecular(),
-				0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, m.getSpecular(), 0);
 		gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, m.getShininess());
-		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, m.getEmission(),
-				0);
+		gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, m.getEmission(), 0);
 	}
 
 	private void drawTex(Quad q, float w, float h) {
@@ -72,6 +70,14 @@ public class DrawUtils {
 			} else {
 				drawTex(q, 1.0f, 1.0f);
 			}
+		}
+	}
+
+	public void drawQuadTexRepeat(Quad q, float cntX, float cntY) {
+		if (App.shadowManager.isShadowMode()) {
+			drawQuad(q, ShadowManager.SHADOW_COLOR);
+		} else {
+			drawTex(q, cntX, cntY);
 		}
 	}
 
