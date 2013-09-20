@@ -1,9 +1,9 @@
 package org.rumter.common_house_jogl.models.primitives;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Plane;
-import org.rumter.common_house_jogl.geom.Point;
-import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.framework.geom.Plane;
+import org.rumter.common_house_jogl.framework.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Quad;
 
 import com.jogamp.opengl.util.texture.Texture;
 

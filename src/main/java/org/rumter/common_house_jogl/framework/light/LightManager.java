@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils.light;
+package org.rumter.common_house_jogl.framework.light;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Point;
 
 public class LightManager {
 

@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils.draw;
+package org.rumter.common_house_jogl.framework.draw;
 
 import java.awt.Color;
 
@@ -7,10 +7,10 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLUquadric;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Point;
-import org.rumter.common_house_jogl.geom.Quad;
-import org.rumter.common_house_jogl.utils.draw.TextureUtils.TextureMode;
-import org.rumter.common_house_jogl.utils.light.ShadowManager;
+import org.rumter.common_house_jogl.framework.draw.TextureUtils.TextureMode;
+import org.rumter.common_house_jogl.framework.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Quad;
+import org.rumter.common_house_jogl.framework.light.ShadowManager;
 
 /**
  * методы для рисования

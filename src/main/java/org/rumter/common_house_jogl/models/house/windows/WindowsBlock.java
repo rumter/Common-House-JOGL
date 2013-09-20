@@ -1,8 +1,8 @@
 package org.rumter.common_house_jogl.models.house.windows;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Point;
-import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.framework.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Quad;
 
 /**
  * Блок из двух окон

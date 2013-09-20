@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils.light;
+package org.rumter.common_house_jogl.framework.light;
 
 import java.awt.Color;
 

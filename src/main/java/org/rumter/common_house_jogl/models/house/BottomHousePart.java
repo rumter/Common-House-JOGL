@@ -3,14 +3,14 @@ package org.rumter.common_house_jogl.models.house;
 import java.util.ArrayList;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Point;
-import org.rumter.common_house_jogl.geom.Quad;
+import org.rumter.common_house_jogl.framework.draw.TextureUtils.TextureMode;
+import org.rumter.common_house_jogl.framework.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Quad;
 import org.rumter.common_house_jogl.models.base.Model;
 import org.rumter.common_house_jogl.models.base.SimpleModel;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
 import org.rumter.common_house_jogl.models.house.windows.Window3;
 import org.rumter.common_house_jogl.models.primitives.Block;
-import org.rumter.common_house_jogl.utils.draw.TextureUtils.TextureMode;
 
 /**
  * Вход и столовая

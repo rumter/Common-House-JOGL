@@ -25,13 +25,13 @@ import javax.media.opengl.fixedfunc.GLLightingFunc;
 import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
 
+import org.rumter.common_house_jogl.framework.MotionManager;
+import org.rumter.common_house_jogl.framework.draw.DrawUtils;
+import org.rumter.common_house_jogl.framework.draw.TextureUtils;
+import org.rumter.common_house_jogl.framework.light.LightManager;
+import org.rumter.common_house_jogl.framework.light.ShadowManager;
 import org.rumter.common_house_jogl.models.Map;
 import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.utils.MotionManager;
-import org.rumter.common_house_jogl.utils.draw.DrawUtils;
-import org.rumter.common_house_jogl.utils.draw.TextureUtils;
-import org.rumter.common_house_jogl.utils.light.LightManager;
-import org.rumter.common_house_jogl.utils.light.ShadowManager;
 
 import com.jogamp.opengl.util.Animator;
 

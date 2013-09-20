@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.geom;
+package org.rumter.common_house_jogl.framework.geom;
 
 public class Quad {
 	private Point p1;

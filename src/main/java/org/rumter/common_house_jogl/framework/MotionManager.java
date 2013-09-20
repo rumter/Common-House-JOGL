@@ -1,10 +1,10 @@
-package org.rumter.common_house_jogl.utils;
+package org.rumter.common_house_jogl.framework;
 
 import javax.media.opengl.GL2;
 
 import org.rumter.common_house_jogl.App;
-import org.rumter.common_house_jogl.geom.Plane;
-import org.rumter.common_house_jogl.geom.Point;
+import org.rumter.common_house_jogl.framework.geom.Plane;
+import org.rumter.common_house_jogl.framework.geom.Point;
 import org.rumter.common_house_jogl.models.primitives.Wall;
 
 /**

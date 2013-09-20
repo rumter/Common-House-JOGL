@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.utils.draw;
+package org.rumter.common_house_jogl.framework.draw;
 
 import java.awt.Color;
 
