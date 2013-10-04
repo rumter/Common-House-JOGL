@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -25,13 +24,14 @@ import javax.media.opengl.fixedfunc.GLLightingFunc;
 import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
 
-import org.rumter.common_house_jogl.framework.MotionManager;
 import org.rumter.common_house_jogl.framework.draw.DrawUtils;
 import org.rumter.common_house_jogl.framework.draw.TextureUtils;
 import org.rumter.common_house_jogl.framework.light.LightManager;
 import org.rumter.common_house_jogl.framework.light.ShadowManager;
-import org.rumter.common_house_jogl.models.Map;
-import org.rumter.common_house_jogl.models.base.Model;
+import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.motion.MotionManager;
+import org.rumter.common_house_jogl.framework.profiling.ProfileManager;
+import org.rumter.common_house_jogl.models.StudentCity;
 
 import com.jogamp.opengl.util.Animator;
 
@@ -50,28 +50,11 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	public static MotionManager motionManager;
 	public static LightManager lightManager;
 	public static ShadowManager shadowManager;
+	public static ProfileManager profileManager;
 
 	public static Model world;
 
 	public static GL2 gl;
-
-	private static ArrayList<Long> t = new ArrayList<Long>();
-
-	@Override
-	public void display(GLAutoDrawable gLDrawable) {
-		gl = gLDrawable.getGL().getGL2();
-		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-		gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
-		gl.glLoadIdentity();
-
-		long t1 = System.currentTimeMillis();
-		motionManager.display();
-		world.display();
-		t.add(System.currentTimeMillis() - t1);
-	}
-
-	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {
-	}
 
 	@Override
 	public void init(GLAutoDrawable gLDrawable) {
@@ -93,10 +76,27 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 
 		texUtils = new TextureUtils();
 		drawUtils = new DrawUtils();
-		motionManager = new MotionManager();
+		motionManager = new MotionManager(0, 1.5f, -100f, 0, 0);
 		lightManager = new LightManager();
 		shadowManager = new ShadowManager();
-		world = new Map(0, 0, 0);
+		world = new StudentCity(0, 0, 0);
+		profileManager = new ProfileManager();
+	}
+
+	@Override
+	public void display(GLAutoDrawable gLDrawable) {
+		gl = gLDrawable.getGL().getGL2();
+		gl.glClear(GL.GL_COLOR_BUFFER_BIT);
+		gl.glClear(GL.GL_DEPTH_BUFFER_BIT);
+		gl.glLoadIdentity();
+
+		profileManager.startTimer();
+		motionManager.display();
+		world.display();
+		profileManager.saveResult();
+	}
+
+	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {
 	}
 
 	@Override
@@ -172,28 +172,6 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		isMouseMove = true;
 	}
 
-	public static void exit() {
-		Long sum = 0L;
-		Long cnt = 0L;
-		for (Long _t : t) {
-			sum += _t;
-			++cnt;
-		}
-		long result = 0;
-		if (cnt > 0) {
-			result = sum / cnt;
-		}
-		System.out.println("average display time = " + result + "ms");
-		System.out.println("memory used = "
-				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024) + "MB");
-		// average display time = 16ms
-		// memory used = 30MB
-
-		animator.stop();
-		frame.dispose();
-		System.exit(0);
-	}
-
 	public static void main(String[] args) {
 		canvas.addGLEventListener(new App());
 		frame.add(canvas);
@@ -213,5 +191,16 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	@Override
 	public void dispose(GLAutoDrawable gLDrawable) {
 		// do nothing
+	}
+
+	public static void exit() {
+		System.out.println("average display time = " + profileManager.getAverageResult() + "ms");
+		System.out.println("memory used = " + profileManager.getMemoryUsed() + "MB");
+		// average display time = 16ms
+		// memory used = 30MB
+
+		animator.stop();
+		frame.dispose();
+		System.exit(0);
 	}
 }

@@ -64,7 +64,7 @@ public class MainStairsWindow extends Window {
 		quads = new ArrayList<Quad>();
 		quadTex = new ArrayList<String>();
 
-		quadTex.add("window");
+		quadTex.add("house/window");
 		quads.add(new Quad(new Point(x, y, z), new Point(l, 0, 0), new Point(0,
 				h, 0)));
 		for (int i = 0; i < countL; ++i)
@@ -76,7 +76,7 @@ public class MainStairsWindow extends Window {
 	private List<String> quadTex;
 
 	private void generateQuads(float x, float y, float z, int type) {
-		quadTex.add("window");
+		quadTex.add("house/window");
 		quads.add(new Quad(new Point(x, y, z), new Point(qw, 0, 0), new Point(
 				0, qh, 0)));
 		quadTex.add("glass");

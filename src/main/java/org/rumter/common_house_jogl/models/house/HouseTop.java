@@ -2,10 +2,10 @@ package org.rumter.common_house_jogl.models.house;
 
 import java.util.ArrayList;
 
-import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.model.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.primitives.Block;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
-import org.rumter.common_house_jogl.models.primitives.Block;
 
 /**
  * крыша общежития
@@ -22,7 +22,7 @@ class HouseTop extends SimpleModel {
 
 		models = new ArrayList<Model>();
 
-		models.add(new Block(x, y + height, z + 0.5f, 65, -18, 3, "houseTop"));
+		models.add(new Block(x, y + height, z + 0.5f, 65, -18, 3, "house/houseTop"));
 	}
 
 	private ArrayList<Model> models;

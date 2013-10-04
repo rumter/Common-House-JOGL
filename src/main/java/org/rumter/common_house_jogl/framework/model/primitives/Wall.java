@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.models.primitives;
+package org.rumter.common_house_jogl.framework.model.primitives;
 
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.framework.geom.Plane;

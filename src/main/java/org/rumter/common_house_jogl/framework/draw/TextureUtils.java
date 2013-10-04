@@ -26,21 +26,23 @@ public final class TextureUtils {
 		REPEAT, STRETCH
 	}
 
+	private static String ROOT_FOLDER = "/tex/";
+	private static String EXT = ".png";
+
 	private Material defaultMaterial;
 	private Texture currentTex = null;
 	private String currentTexStr = "";
 
 	public TextureUtils() {
-		String allTex[] = { "glass", "window", "indent", "bricks", "quad", "quadBg", "blueLine", "whiteLine", "kr1",
+		String houseFolder = "house";
+		String houseTex[] = { "glass", "window", "indent", "bricks", "quad", "quadBg", "blueLine", "whiteLine", "kr1",
 				"beton", "build1", "build2", "houseTop", "betonLine", "blueLineBottom", "doors", "title8", "cylinder",
 				"WashRoomWindow", "MainStairsWindow", "WindowsBlock", "WindowsBlock2", "BlackStairsWindow",
 				"BlackStairsWindow2" };
-		mapTex = new TreeMap<>();
-		for (String s : allTex) {
-			Texture tex = factory(s);
-			tex.setTexParameterf(App.gl, GL2.GL_TEXTURE_WRAP_S, GL2.GL_REPEAT);
-			tex.setTexParameterf(App.gl, GL2.GL_TEXTURE_WRAP_T, GL2.GL_REPEAT);
-			mapTex.put(s, tex);
+		mapTex = new TreeMap<String, Texture>();
+		for (String s : houseTex) {
+			String filePath = houseFolder + "/" + s;
+			mapTex.put(filePath, factory(filePath));
 		}
 
 		defaultMaterial = Material.factorySimpleMaterial(Color.white);
@@ -60,9 +62,12 @@ public final class TextureUtils {
 	 */
 	public Texture factory(String filePath) {
 		try {
-			InputStream stream = getClass().getResourceAsStream("/tex/" + filePath + ".png");
-			TextureData data = TextureIO.newTextureData(App.glp, stream, false, "png");
-			return TextureIO.newTexture(data);
+			InputStream stream = getClass().getResourceAsStream(ROOT_FOLDER + filePath + EXT);
+			TextureData data = TextureIO.newTextureData(App.glp, stream, false, EXT);
+			Texture tex = TextureIO.newTexture(data);
+			tex.setTexParameterf(App.gl, GL2.GL_TEXTURE_WRAP_S, GL2.GL_REPEAT);
+			tex.setTexParameterf(App.gl, GL2.GL_TEXTURE_WRAP_T, GL2.GL_REPEAT);
+			return tex;
 		} catch (IOException exc) {
 			System.out.println("Texture not found: " + filePath);
 		}

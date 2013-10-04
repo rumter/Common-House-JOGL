@@ -63,11 +63,11 @@ public class BlackStairsWindow extends Window {
 
 	@Override
 	public void display() {
-		App.texUtils.prepareForDisplay("window");
+		App.texUtils.prepareForDisplay("house/window");
 		App.drawUtils.drawQuadTex(window1);
-		App.texUtils.prepareForDisplay("glass");
+		App.texUtils.prepareForDisplay("house/glass");
 		App.drawUtils.drawQuadTex(glass);
-		App.texUtils.prepareForDisplay("window");
+		App.texUtils.prepareForDisplay("house/window");
 		App.drawUtils.drawQuadTex(window2);
 	}
 }

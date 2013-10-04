@@ -1,7 +1,7 @@
 package org.rumter.common_house_jogl.models.house;
 
-import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.model.base.SimpleModel;
 
 /**
  * корпус общежития

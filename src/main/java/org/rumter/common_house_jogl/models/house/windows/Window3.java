@@ -85,10 +85,10 @@ public class Window3 extends Window {
 	@Override
 	public void display() {
 		// всё окно
-		App.texUtils.prepareForDisplay("window");
+		App.texUtils.prepareForDisplay("house/window");
 		App.drawUtils.drawQuadTex(window);
 		// стёкла
-		App.texUtils.prepareForDisplay("glass");
+		App.texUtils.prepareForDisplay("house/glass");
 		App.drawUtils.drawQuadTex(glass1);
 		App.drawUtils.drawQuadTex(glass2);
 		App.drawUtils.drawQuadTex(glass3);

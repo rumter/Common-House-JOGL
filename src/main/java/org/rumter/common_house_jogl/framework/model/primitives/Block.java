@@ -1,11 +1,11 @@
-package org.rumter.common_house_jogl.models.primitives;
+package org.rumter.common_house_jogl.framework.model.primitives;
 
 import java.awt.Color;
 
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.framework.geom.Point;
 import org.rumter.common_house_jogl.framework.geom.Quad;
-import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.base.SimpleModel;
 
 /**
  * Блок

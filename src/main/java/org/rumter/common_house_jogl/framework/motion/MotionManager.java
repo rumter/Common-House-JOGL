@@ -1,11 +1,11 @@
-package org.rumter.common_house_jogl.framework;
+package org.rumter.common_house_jogl.framework.motion;
 
 import javax.media.opengl.GL2;
 
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.framework.geom.Plane;
 import org.rumter.common_house_jogl.framework.geom.Point;
-import org.rumter.common_house_jogl.models.primitives.Wall;
+import org.rumter.common_house_jogl.framework.model.primitives.Wall;
 
 /**
  * движение в 3D пространстве
@@ -18,11 +18,14 @@ public class MotionManager {
 	private final float step = 1.0f;
 	private final float stepH = 1.0f;
 
-	public float rotateX = 0.0f;
-	public float rotateY = 0.0f;
-	private Point position = new Point(0, 1.5f, -100);
+	public float rotateX;
+	public float rotateY;
+	private Point position;
 
-	public MotionManager() {
+	public MotionManager(float startX, float startY, float startZ, float startRotateX, float startRotateY) {
+		position = new Point(startX, startY, startZ);
+		rotateX = startRotateX;
+		rotateY = startRotateY;
 	}
 
 	public void display() {
@@ -59,8 +62,7 @@ public class MotionManager {
 	 * вперёд
 	 */
 	public void go() {
-		Point newPosition = position.add(new Point(0, 0, -step)
-				.rotateXZ(rotateY));
+		Point newPosition = position.add(new Point(0, 0, -step).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -70,8 +72,7 @@ public class MotionManager {
 	 * вправо
 	 */
 	public void right() {
-		Point newPosition = position.add(new Point(step, 0, 0)
-				.rotateXZ(rotateY));
+		Point newPosition = position.add(new Point(step, 0, 0).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -81,8 +82,7 @@ public class MotionManager {
 	 * назад
 	 */
 	public void back() {
-		Point newPosition = position.sub(new Point(0, 0, -step)
-				.rotateXZ(rotateY));
+		Point newPosition = position.sub(new Point(0, 0, -step).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -92,8 +92,7 @@ public class MotionManager {
 	 * влево
 	 */
 	public void left() {
-		Point newPosition = position.sub(new Point(step, 0, 0)
-				.rotateXZ(rotateY));
+		Point newPosition = position.sub(new Point(step, 0, 0).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}

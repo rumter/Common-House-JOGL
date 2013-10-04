@@ -47,7 +47,7 @@ public class WashRoomWindow extends WindowsBlock {
 	private List<String> quadTex;
 
 	private void generateQuads(float x, float y, float z) {// всё окно
-		quadTex.add("window");
+		quadTex.add("house/window");
 		quads.add(new Quad(new Point(x, y, z), new Point(Window3.l, 0, 0),
 				new Point(0, Window3.h, 0)));
 		float quadLineW = 0.01f;
@@ -55,7 +55,7 @@ public class WashRoomWindow extends WindowsBlock {
 			for (int j = 0; j < countG; ++j) {
 				float xi = x + Window3.w2 + j * qw;
 				float yi = y + Window3.w1 + i * qh;
-				quadTex.add("quadBg");
+				quadTex.add("house/quadBg");
 				quads.add(new Quad(new Point(xi, yi, z), new Point(qw, 0, 0),
 						new Point(0, qh, 0)).moveZ(0.01f));
 			}
@@ -64,7 +64,7 @@ public class WashRoomWindow extends WindowsBlock {
 			for (int j = 0; j < countG; ++j) {
 				float xi = x + Window3.w2 + j * qw;
 				float yi = y + Window3.w1 + i * qh;
-				quadTex.add("quad");
+				quadTex.add("house/quad");
 				quads.add(new Quad(
 						new Point(xi + quadLineW, yi + quadLineW, z),
 						new Point(qw - quadLineW - quadLineW, 0, 0), new Point(

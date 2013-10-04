@@ -1,4 +1,4 @@
-package org.rumter.common_house_jogl.models.primitives;
+package org.rumter.common_house_jogl.framework.model.primitives;
 
 
 /**
@@ -10,6 +10,6 @@ package org.rumter.common_house_jogl.models.primitives;
 public class BricksBlock extends Block {
 
 	public BricksBlock(float x, float y, float z, float wx, float wz, float h) {
-		super(x, y, z, wx, wz, h, "bricks");
+		super(x, y, z, wx, wz, h, "house/bricks");
 	}
 }

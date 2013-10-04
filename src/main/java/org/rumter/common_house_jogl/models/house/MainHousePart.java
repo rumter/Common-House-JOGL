@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.framework.geom.Point;
 import org.rumter.common_house_jogl.framework.geom.Quad;
-import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.model.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.primitives.BricksBlock;
 import org.rumter.common_house_jogl.models.house.windows.BlackStairsWindow;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
 import org.rumter.common_house_jogl.models.house.windows.WindowsBlock;
-import org.rumter.common_house_jogl.models.primitives.BricksBlock;
 
 /**
  * Жилая часть общежития
@@ -161,27 +161,27 @@ class MainHousePart extends SimpleModel {
 		for (Model m : bricks) {
 			m.display();
 		}
-		App.texUtils.prepareForDisplay("WashRoomWindow");
+		App.texUtils.prepareForDisplay("house/WashRoomWindow");
 		for (Quad q : washRoomsWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
 		}
-		App.texUtils.prepareForDisplay("BlackStairsWindow");
+		App.texUtils.prepareForDisplay("house/BlackStairsWindow");
 		for (Quad q : blackStairsWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
 		}
-		App.texUtils.prepareForDisplay("BlackStairsWindow2");
+		App.texUtils.prepareForDisplay("house/BlackStairsWindow2");
 		for (Quad q : blackStairsBottomWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 1);
 		}
-		App.texUtils.prepareForDisplay("MainStairsWindow");
+		App.texUtils.prepareForDisplay("house/MainStairsWindow");
 		for (Quad q : mainStairsWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
 		}
-		App.texUtils.prepareForDisplay("WindowsBlock");
+		App.texUtils.prepareForDisplay("house/WindowsBlock");
 		for (Quad q : blockWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
 		}
-		App.texUtils.prepareForDisplay("WindowsBlock2");
+		App.texUtils.prepareForDisplay("house/WindowsBlock2");
 		for (Quad q : blockBottomWindows) {
 			App.drawUtils.drawQuadTexRepeat(q, 1, 1);
 		}

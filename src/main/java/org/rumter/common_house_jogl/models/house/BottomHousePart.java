@@ -6,11 +6,11 @@ import org.rumter.common_house_jogl.App;
 import org.rumter.common_house_jogl.framework.draw.TextureUtils.TextureMode;
 import org.rumter.common_house_jogl.framework.geom.Point;
 import org.rumter.common_house_jogl.framework.geom.Quad;
-import org.rumter.common_house_jogl.models.base.Model;
-import org.rumter.common_house_jogl.models.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.model.base.SimpleModel;
+import org.rumter.common_house_jogl.framework.model.primitives.Block;
 import org.rumter.common_house_jogl.models.house.windows.FlatCell;
 import org.rumter.common_house_jogl.models.house.windows.Window3;
-import org.rumter.common_house_jogl.models.primitives.Block;
 
 /**
  * Вход и столовая
@@ -47,14 +47,14 @@ class BottomHousePart extends SimpleModel {
 		models = new ArrayList<Model>();
 
 		// фундамент и крыша
-		models.add(new Block(x - ax, y, z + az, wx, -wz, h1, "beton"));
-		models.add(new Block(x - ax, y + h - h1, z + az, wx, -wz, h2, "kr1"));
+		models.add(new Block(x - ax, y, z + az, wx, -wz, h1, "house/beton"));
+		models.add(new Block(x - ax, y + h - h1, z + az, wx, -wz, h2, "house/kr1"));
 
 		// здание
 		models.add(new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1,
-				"build1"));
+				"house/build1"));
 		models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f,
-				"build2"));
+				"house/build2"));
 
 		// колонны
 		p1 = new Point(x + 2f, y + h1, z + 1f);
@@ -83,11 +83,11 @@ class BottomHousePart extends SimpleModel {
 		for (Model m : models) {
 			m.display();
 		}
-		App.texUtils.prepareForDisplay("doors");
+		App.texUtils.prepareForDisplay("house/doors");
 		App.drawUtils.drawQuadTex(doorQuad, TextureMode.STRETCH);
-		App.texUtils.prepareForDisplay("title8");
+		App.texUtils.prepareForDisplay("house/title8");
 		App.drawUtils.drawQuadTex(titleQuad, TextureMode.STRETCH);
-		App.texUtils.prepareForDisplay("cylinder");
+		App.texUtils.prepareForDisplay("house/cylinder");
 		App.drawUtils.drawCylinder(p1, 0.5f, h - h1 - h2 + 0.2f);
 		App.drawUtils.drawCylinder(p2, 0.5f, h - h1 - h2 + 0.2f);
 		App.drawUtils.drawCylinder(p3, 0.5f, h - h1 - h2 + 0.2f);

@@ -1,8 +1,8 @@
-package org.rumter.common_house_jogl.models.base;
+package org.rumter.common_house_jogl.framework.model.base;
 
 import java.util.ArrayList;
 
-import org.rumter.common_house_jogl.models.primitives.Wall;
+import org.rumter.common_house_jogl.framework.model.primitives.Wall;
 
 /**
  * 3D-модель

@@ -92,7 +92,7 @@ public class WindowsBlock extends Window {
 	protected Quad indent1, indent2;
 
 	protected void drawIndents() {
-		App.texUtils.prepareForDisplay("indent");
+		App.texUtils.prepareForDisplay("house/indent");
 		App.drawUtils.drawQuadTex(indent1);
 		App.drawUtils.drawQuadTex(indent2);
 	}
@@ -103,7 +103,7 @@ public class WindowsBlock extends Window {
 	protected Quad separator;
 
 	protected void drawSeparator() {
-		App.texUtils.prepareForDisplay("window");
+		App.texUtils.prepareForDisplay("house/window");
 		App.drawUtils.drawQuadTex(separator);
 	}
 
@@ -113,7 +113,7 @@ public class WindowsBlock extends Window {
 	protected Quad[] sillQuads;
 
 	protected void drawSill() {
-		App.texUtils.prepareForDisplay("window");
+		App.texUtils.prepareForDisplay("house/window");
 		for (int i = 0; i < sillQuads.length; ++i) {
 			App.drawUtils.drawQuadTex(sillQuads[i]);
 		}
