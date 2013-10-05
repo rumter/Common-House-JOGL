@@ -39,9 +39,15 @@ public final class TextureUtils {
 				"beton", "build1", "build2", "houseTop", "betonLine", "blueLineBottom", "doors", "title8", "cylinder",
 				"WashRoomWindow", "MainStairsWindow", "WindowsBlock", "WindowsBlock2", "BlackStairsWindow",
 				"BlackStairsWindow2" };
+		String axisFolder = "axis";
+		String axisTex[] = { "metal" };
 		mapTex = new TreeMap<String, Texture>();
 		for (String s : houseTex) {
 			String filePath = houseFolder + "/" + s;
+			mapTex.put(filePath, factory(filePath));
+		}
+		for (String s : axisTex) {
+			String filePath = axisFolder + "/" + s;
 			mapTex.put(filePath, factory(filePath));
 		}
 

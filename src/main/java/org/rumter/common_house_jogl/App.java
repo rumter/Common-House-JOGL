@@ -29,6 +29,7 @@ import org.rumter.common_house_jogl.framework.draw.TextureUtils;
 import org.rumter.common_house_jogl.framework.light.LightManager;
 import org.rumter.common_house_jogl.framework.light.ShadowManager;
 import org.rumter.common_house_jogl.framework.model.base.Model;
+import org.rumter.common_house_jogl.framework.model.special.coords.Axis;
 import org.rumter.common_house_jogl.framework.motion.MotionManager;
 import org.rumter.common_house_jogl.framework.profiling.ProfileManager;
 import org.rumter.common_house_jogl.models.StudentCity;
@@ -53,6 +54,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	public static ProfileManager profileManager;
 
 	public static Model world;
+	public static Axis axis;
 
 	public static GL2 gl;
 
@@ -81,6 +83,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		shadowManager = new ShadowManager();
 		world = new StudentCity(0, 0, 0);
 		profileManager = new ProfileManager();
+		axis = new Axis();
 	}
 
 	@Override
@@ -94,6 +97,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		motionManager.display();
 		world.display();
 		profileManager.saveResult();
+		axis.display();
 	}
 
 	public void displayChanged(GLAutoDrawable gLDrawable, boolean modeChanged, boolean deviceChanged) {

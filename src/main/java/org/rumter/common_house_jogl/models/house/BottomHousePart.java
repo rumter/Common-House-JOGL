@@ -34,8 +34,7 @@ class BottomHousePart extends SimpleModel {
 	/**
 	 * отступы
 	 */
-	private static final float ax = 1.5f, az = 3, bz = 1.5f, h1 = 0.40f,
-			h2 = 0.5f, w1 = 0.3f, w2 = 3f;
+	private static final float ax = 1.5f, az = 3, bz = 1.5f, h1 = 0.40f, h2 = 0.5f, w1 = 0.3f, w2 = 3f;
 	/**
 	 * колонны
 	 */
@@ -51,10 +50,8 @@ class BottomHousePart extends SimpleModel {
 		models.add(new Block(x - ax, y + h - h1, z + az, wx, -wz, h2, "house/kr1"));
 
 		// здание
-		models.add(new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1,
-				"house/build1"));
-		models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f,
-				"house/build2"));
+		models.add(new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1, "house/build1"));
+		models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
 
 		// колонны
 		p1 = new Point(x + 2f, y + h1, z + 1f);
@@ -66,12 +63,11 @@ class BottomHousePart extends SimpleModel {
 		models.add(new Window3(x + 20f, y + h1 + 0.2f, z, 0.01f));
 
 		// дверь
-		doorQuad = new Quad(new Point(x + 12f, y + h1, z + 0.01f), new Point(0,
-				2.5f, 0.01f), new Point(4f, 0, 0.01f));
+		doorQuad = new Quad(new Point(x + 12f, y + h1, z + 0.01f), new Point(0, 2.5f, 0), new Point(4f, 0, 0));
 
 		// табличка над общагой
-		titleQuad = new Quad(new Point(x + 10.5f, y + h - h1 + 0.05f, z + az
-				+ 0.01f), new Point(0, h1, 0), new Point(6f, 0, 0));
+		titleQuad = new Quad(new Point(x + 10.5f, y + h - h1 + 0.05f, z + az + 0.01f), new Point(0, h1, 0), new Point(
+				6f, 0, 0));
 	}
 
 	private ArrayList<Model> models;
@@ -88,8 +84,8 @@ class BottomHousePart extends SimpleModel {
 		App.texUtils.prepareForDisplay("house/title8");
 		App.drawUtils.drawQuadTex(titleQuad, TextureMode.STRETCH);
 		App.texUtils.prepareForDisplay("house/cylinder");
-		App.drawUtils.drawCylinder(p1, 0.5f, h - h1 - h2 + 0.2f);
-		App.drawUtils.drawCylinder(p2, 0.5f, h - h1 - h2 + 0.2f);
-		App.drawUtils.drawCylinder(p3, 0.5f, h - h1 - h2 + 0.2f);
+		App.drawUtils.drawCylinder(p1, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		App.drawUtils.drawCylinder(p2, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		App.drawUtils.drawCylinder(p3, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
 	}
 }

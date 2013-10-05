@@ -36,13 +36,13 @@ public class DrawUtils {
 	private void drawTex(Quad q, float w, float h) {
 		GL2 gl = App.gl;
 		gl.glBegin(GL2.GL_QUADS);
-		gl.glTexCoord2f(0.0f, 0.0f);
+		gl.glTexCoord2f(0, h);
 		gl.glVertex3fv(q.getVertexArray()[0], 0);
-		gl.glTexCoord2f(0.0f, h);
+		gl.glTexCoord2f(0, 0);
 		gl.glVertex3fv(q.getVertexArray()[1], 0);
-		gl.glTexCoord2f(w, h);
+		gl.glTexCoord2f(w, 0);
 		gl.glVertex3fv(q.getVertexArray()[2], 0);
-		gl.glTexCoord2f(w, 0.0f);
+		gl.glTexCoord2f(w, h);
 		gl.glVertex3fv(q.getVertexArray()[3], 0);
 		gl.glEnd();
 	}
@@ -85,26 +85,24 @@ public class DrawUtils {
 		drawQuadTex(q, TextureMode.REPEAT);
 	}
 
-	public void drawCylinder(Point p, float r, float h) {
+	public void drawCylinder(Point p, float r, float h, int rotateX, int rotateY) {
 		GL2 gl = App.gl;
 		gl.glPushMatrix();
-		gl.glTranslatef(p.x, p.y + h, p.z);
-		gl.glRotatef(90, 1, 0, 0);
+		gl.glTranslatef(p.x, p.y, p.z);
+		gl.glRotatef(rotateX, 1, 0, 0);
+		gl.glRotatef(rotateY, 0, 1, 0);
 		GLUquadric glq = App.glu.gluNewQuadric();
 		App.glu.gluQuadricTexture(glq, true);
 		App.glu.gluCylinder(glq, r, r, h, 20, 20);
 		gl.glPopMatrix();
 	}
 
-	public void drawSphere(Color c, Point p, float r) {
+	public void drawSphere(Point p, float r) {
 		GL2 gl = App.gl;
-		if (App.shadowManager.isShadowMode()) {
-			c = Color.BLACK;
-		}
 		gl.glPushMatrix();
-		gl.glTranslatef(p.x, p.y + r, p.z);
-		gl.glColor3f(c.getRed(), c.getGreen(), c.getBlue());
+		gl.glTranslatef(p.x, p.y, p.z);
 		GLUquadric glq = App.glu.gluNewQuadric();
+		App.glu.gluQuadricTexture(glq, true);
 		App.glu.gluSphere(glq, r, 10, 10);
 		gl.glPopMatrix();
 	}

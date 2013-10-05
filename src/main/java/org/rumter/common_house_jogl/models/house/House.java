@@ -30,8 +30,8 @@ public class House extends SimpleModel {
 
 	@Override
 	public void display() {
-		mainPart.display();
-		houseTop.display();
+		//mainPart.display();
+		//houseTop.display();
 		bottomPart.display();
 	}
 }
