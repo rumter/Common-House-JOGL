@@ -49,7 +49,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>org.rumter.common_house_jogl.App</mainClass>
+          <mainClass>org.rumter.chj.App</mainClass>
         </configuration>
       </plugin>
     </plugins>
