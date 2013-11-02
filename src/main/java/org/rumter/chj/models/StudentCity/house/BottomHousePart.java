@@ -32,24 +32,29 @@ class BottomHousePart extends SimpleModel {
 	/**
 	 * отступы
 	 */
-	private static final float ax = 1.5f, az = 3, bz = 1.5f, h1 = 0.40f, h2 = 0.5f, w1 = 0.3f, w2 = 3f;
+	private static final float ax = 1.5f, az = 3, bz = 1.5f, h1 = 0.40f, h2 = 0.5f, w1 = 0.4f, w2 = 3f;
 	/**
 	 * колонны
 	 */
 	private static Point p1, p2, p3;
 
-	public BottomHousePart(float x, float y, float z) {
+	public BottomHousePart(float x, float y, float z, int type) {
 		super(x, y, z);
 
 		models = new ArrayList<Model>();
 
 		// фундамент и крыша
-		models.add(new Block(x - ax, y, z + az, wx, -wz, h1, "house/beton"));
-		models.add(new Block(x - ax, y + h - h1, z + az, wx, -wz, h2, "house/kr1"));
+		float startX = (type == 1 ? x - ax : x - w1);
+		models.add(new Block(startX, y, z + az, wx, -wz, h1, "house/beton"));
+		models.add(new Block(startX, y + h - h1, z + az, wx, -wz, h2, "house/kr1"));
 
 		// здание
 		models.add(new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1, "house/build1"));
-		models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
+		if (type == 1) {
+			models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
+		} else {
+			models.add(new Block(x - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
+		}
 
 		// колонны
 		p1 = new Point(x + 2f, y + h1, z + 1f);

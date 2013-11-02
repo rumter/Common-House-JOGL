@@ -27,7 +27,7 @@ public class Ground extends SimpleModel {
 
 	@Override
 	public void display() {
-		App.texUtils.prepareForDisplay("ground/ground_");
+		App.texUtils.prepareForDisplay("ground/ground_1");
 		App.drawUtils.drawQuadTex(q);
 		trackSet.display();
 	}

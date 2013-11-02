@@ -14,16 +14,19 @@ import org.rumter.chj.framework.model.primitives.Block;
  */
 class HouseTop extends SimpleModel {
 
-	public static final float height = 3.05f * 10;
-
-	public static final float width = House.l + 5;
-
 	public HouseTop(float x, float y, float z) {
 		super(x, y, z);
 
 		models = new ArrayList<Model>();
 
-		models.add(new Block(x, y + height, z + 0.5f, width, -18, 3, "house/houseTop"));
+		models.add(new Block(x, // x
+				y + HouseSizes.TOP_START_H, // y
+				z + HouseSizes.BLOCK_SEPARATOR_LW, // z
+				HouseSizes.HOUSE_L, // wx
+				- HouseSizes.HOUSE_W, // wz
+				HouseSizes.TOP_H, // h
+				"house/houseTop" // tex
+		));
 	}
 
 	private ArrayList<Model> models;

@@ -35,10 +35,10 @@ public class StudentCity extends World {
 
 		ts.globalFolder("StudentCity");
 
-		//ts.folder("house");
-		//ts.add(new String[] { "bricks", "kr1", "beton", "build1", "build2", "houseTop", "betonLine", "doors", "title8",
-		//		"cylinder", "WashRoomWindow", "MainStairsWindow", "WindowsBlock", "WindowsBlock2", "BlackStairsWindow",
-		//		"BlackStairsWindow2", "SimpleWindows" });
+		ts.folder("house");
+		ts.add(new String[] { "bricks", "kr1", "beton", "build1", "build2", "houseTop", "betonLine", "doors", "title8",
+				"cylinder", "WashRoomWindow", "MainStairsWindow", "WindowsBlock", "WindowsBlock2", "BlackStairsWindow",
+				"BlackStairsWindow2", "SimpleWindows" });
 
 		ts.folder("axis");
 		ts.add(new String[] { "metal" });

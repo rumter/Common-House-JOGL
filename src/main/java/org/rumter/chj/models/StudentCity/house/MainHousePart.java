@@ -15,35 +15,17 @@ import org.rumter.chj.framework.model.base.SimpleModel;
  * @email rumtery@yandex.ru
  */
 class MainHousePart extends SimpleModel {
-	/**
-	 * длина границы
-	 */
-	private static final float borderL = 0.60f;
-	/**
-	 * длина разделителя
-	 */
-	private static final float separatorL = 0.40f;
-	/**
-	 * ширина границы
-	 */
-	private static final float borderW = 8f;
-	/**
-	 * высота синей полосы
-	 */
-	public static final float blueLineH = 1.0f;
-	/**
-	 * высота белой полосы
-	 */
-	public static final float whiteLineH = 0.20f;
-	/**
-	 * высота этажа
-	 */
-	public static final float flatH = 2.05f + blueLineH;
 
-	public static final float windowsBlockL = 6.5f;
-	public static final float blackStairsWindowL = 1.5f;
-
-	public MainHousePart(float x, float y, float z) {
+	/**
+	 * если type = 1, то вход слева<br />
+	 * если type = 2, то вход справа<br/>
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param type
+	 */
+	public MainHousePart(float x, float y, float z, int type) {
 		super(x, y, z);
 
 		bricks = new ArrayList<BricksBlock>();
@@ -54,79 +36,173 @@ class MainHousePart extends SimpleModel {
 		blockWindows = new ArrayList<Quad>();
 		blockBottomWindows = new ArrayList<Quad>();
 
-		float step = separatorL + windowsBlockL;
-		float sep = separatorL;
-		float w1 = windowsBlockL;
-		float w2 = blackStairsWindowL;
+		// left side
+		{
+			float startY = (type == 1 ? y + HouseSizes.FLOOR_H : y);
+			int countFloors = (type == 1 ? 9 : 10);
 
-		bricks.add(new BricksBlock(x, y + flatH, z + sep, borderL, -borderW - sep, 9 * flatH));
-		bricks.add(new BricksBlock(x, y + flatH, z + sep - borderW - 1f, borderL, -borderW - sep, 9 * flatH));
-		bricks.add(new BricksBlock(x + 0.3f, y + flatH, z + sep - borderW + sep, borderL, -borderW - sep, 9 * flatH));
-
-		bricks.add(new BricksBlock(x + borderL + 9 * step + w2, y, z + sep, borderL, -borderW - sep, 10 * flatH));
-		bricks.add(new BricksBlock(x + borderL + 9 * step + w2, y, z + sep - borderW - 1f, borderL, -borderW - sep,
-				10 * flatH));
-		bricks.add(new BricksBlock(x + borderL + 9 * step + w2 - 0.3f, y, z + sep - borderW + sep, borderL, -borderW
-				- sep, 10 * flatH));
-
-		for (int i = 1; i <= 3; ++i) {
-			bricks.add(new BricksBlock(x + borderL + i * w1 + (i - 1) * sep, y + flatH, z + sep, sep, -separatorL
-					- borderW - 1f - borderW - separatorL, 9 * flatH));
+			bricks.add(new BricksBlock(x, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
+					countFloors * HouseSizes.FLOOR_H // h
+			));
+			bricks.add(new BricksBlock(x, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W - HouseSizes.SIDE_WINDOW_W, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
+					countFloors * HouseSizes.FLOOR_H // h
+			));
+			bricks.add(new BricksBlock(x + HouseSizes.SIDE_WINDOW_L, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W + HouseSizes.BLOCK_SEPARATOR_LW, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
+					countFloors * HouseSizes.FLOOR_H // h
+			));
 		}
-		for (int i = 4; i <= 9; ++i) {
-			bricks.add(new BricksBlock(x + borderL + i * w1 + (i - 1) * sep, y, z + sep, sep, -separatorL - borderW
-					- 1f - borderW - separatorL, 10 * flatH));
+
+		// right side
+		{
+			float startY = (type == 2 ? y + HouseSizes.FLOOR_H : y);
+			int countFloors = (type == 2 ? 9 : 10);
+
+			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wx
+					countFloors * HouseSizes.FLOOR_H // h
+			));
+			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W - 1f, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
+					countFloors * HouseSizes.FLOOR_H // h
+			));
+			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L - HouseSizes.SIDE_WINDOW_L, // x
+					startY, // y
+					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W + HouseSizes.BLOCK_SEPARATOR_LW, // z
+					HouseSizes.HOUSE_INDENT_L, // wx
+					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
+					countFloors * HouseSizes.FLOOR_H // h
+			));
 		}
 
-		Point vh1 = new Point(0, flatH, 0);
-		Point vh9 = new Point(0, flatH * 9, 0);
-		Point vw = new Point(w1, 0, 0);
-		Point vw2 = new Point(w2, 0, 0);
+		// separators
+		{
+			int iFirstCutFloor = (type == 1 ? 1 : 6);
+			int iLastCutFloor = (type == 1 ? 4 : 9);
+			int iFirstFullFloor = (type == 1 ? 5 : 1);
+			int iLastFullFloor = (type == 1 ? 9 : 5);
 
-		float backZ = z - borderW - 1f - borderW;
+			for (int i = iFirstCutFloor; i <= iLastCutFloor; ++i) {
+				float xStart = x + HouseSizes.HOUSE_INDENT_L + i * HouseSizes.BLOCK_STEP_L
+						- HouseSizes.BLOCK_SEPARATOR_LW;
+				if (type == 2) {
+					xStart += HouseSizes.BLACK_STAIRS_L - HouseSizes.BLOCK_L;
+				}
+				
+				bricks.add(new BricksBlock(xStart, // x
+						y + HouseSizes.FLOOR_H, // y
+						z + HouseSizes.BLOCK_SEPARATOR_LW, // z
+						HouseSizes.BLOCK_SEPARATOR_LW, // wx
+						-HouseSizes.BLOCK_SEPARATOR_LW * 2 - HouseSizes.HOUSE_HALF_W * 2 - HouseSizes.SIDE_WINDOW_W, // wz
+						9 * HouseSizes.FLOOR_H // h
+				));
+			}
+			for (int i = iFirstFullFloor; i <= iLastFullFloor; ++i) {
+				float xStart = x + HouseSizes.HOUSE_INDENT_L + i * HouseSizes.BLOCK_STEP_L
+						- HouseSizes.BLOCK_SEPARATOR_LW;
+				if (type == 2) {
+					xStart += HouseSizes.BLACK_STAIRS_L - HouseSizes.BLOCK_L;
+				}
+				
+				bricks.add(new BricksBlock(xStart, // x
+						y, // y
+						z + HouseSizes.BLOCK_SEPARATOR_LW, // z
+						HouseSizes.BLOCK_SEPARATOR_LW, // wx
+						-HouseSizes.BLOCK_SEPARATOR_LW * 2 - HouseSizes.HOUSE_HALF_W * 2 - HouseSizes.SIDE_WINDOW_W, // wz
+						10 * HouseSizes.FLOOR_H // h
+				));
+			}
+		}
 
-		washRoomsWindows.add(new Quad(new Point(x + borderL, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL, y + flatH, backZ), vh9, vw));
+		Point vh1 = new Point(0, HouseSizes.FLOOR_H, 0);
+		Point vh9 = new Point(0, HouseSizes.FLOOR_H * 9, 0);
+		Point vw = new Point(HouseSizes.BLOCK_L, 0, 0);
+		Point vw2 = new Point(HouseSizes.BLACK_STAIRS_L, 0, 0);
 
-		blockWindows.add(new Quad(new Point(x + borderL + step, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step, y + flatH, backZ), vh9, vw));
+		float backZ = z - HouseSizes.HOUSE_HALF_W - 1f - HouseSizes.HOUSE_HALF_W;
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 2, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 2, y + flatH, backZ), vh9, vw));
+		setFlatsConfig(type);
 
-		mainStairsWindows.add(new Quad(new Point(x + borderL + step * 3, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 3, y + flatH, backZ), vh9, vw));
+		// wash
+		{
+			float startX = HouseSizes.HOUSE_INDENT_L + HouseSizes.BLOCK_STEP_L * wash
+					+ (wash > blackStairs ? -HouseSizes.BLOCK_L + HouseSizes.BLACK_STAIRS_L : 0);
+			washRoomsWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, z), vh9, vw));
+			blockWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, backZ), vh9, vw));
+		}
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 4, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 4, y + flatH, backZ), vh9, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 4, y, z), vh1, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 4, y, backZ), vh1, vw));
+		// block
+		for (int i = 0; i < block.length; ++i) {
+			float startX = HouseSizes.HOUSE_INDENT_L + HouseSizes.BLOCK_STEP_L * block[i]
+					+ (wash > blackStairs ? -HouseSizes.BLOCK_L + HouseSizes.BLACK_STAIRS_L : 0);
+			blockWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, z), vh9, vw));
+			blockWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, backZ), vh9, vw));
+		}
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 5, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 5, y + flatH, backZ), vh9, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 5, y, z), vh1, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 5, y, backZ), vh1, vw));
+		// main stairs
+		{
+			float startX = HouseSizes.HOUSE_INDENT_L + HouseSizes.BLOCK_STEP_L * mainStairs
+					+ (wash > blackStairs ? -HouseSizes.BLOCK_L + HouseSizes.BLACK_STAIRS_L : 0);
+			mainStairsWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, z), vh9, vw));
+			blockWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, backZ), vh9, vw));
+		}
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 6, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 6, y + flatH, backZ), vh9, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 6, y, z), vh1, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 6, y, backZ), vh1, vw));
+		// block bottom
+		for (int i = 0; i < blockBottom.length; ++i) {
+			float startX = HouseSizes.HOUSE_INDENT_L + HouseSizes.BLOCK_STEP_L * blockBottom[i]
+					+ (wash > blackStairs ? -HouseSizes.BLOCK_L + HouseSizes.BLACK_STAIRS_L : 0);
+			blockBottomWindows.add(new Quad(new Point(x + startX, y, z), vh1, vw));
+			blockBottomWindows.add(new Quad(new Point(x + startX, y, backZ), vh1, vw));
+		}
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 7, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 7, y + flatH, backZ), vh9, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 7, y, z), vh1, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 7, y, backZ), vh1, vw));
+		// black stairs
+		{
+			float startX = HouseSizes.HOUSE_INDENT_L + HouseSizes.BLOCK_STEP_L * blackStairs;
+			blackStairsWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, z), vh9, vw2));
+			blackStairsWindows.add(new Quad(new Point(x + startX, y + HouseSizes.FLOOR_H, backZ), vh9, vw2));
+			blackStairsBottomWindows.add(new Quad(new Point(x + startX, y, z), vh1, vw2));
+			blackStairsBottomWindows.add(new Quad(new Point(x + startX, y, backZ), vh1, vw2));
+		}
 
-		blockWindows.add(new Quad(new Point(x + borderL + step * 8, y + flatH, z), vh9, vw));
-		blockWindows.add(new Quad(new Point(x + borderL + step * 8, y + flatH, backZ), vh9, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 8, y, z), vh1, vw));
-		blockBottomWindows.add(new Quad(new Point(x + borderL + step * 8, y, backZ), vh1, vw));
+	}
 
-		blackStairsWindows.add(new Quad(new Point(x + borderL + step * 9, y + flatH, z), vh9, vw2));
-		blackStairsWindows.add(new Quad(new Point(x + borderL + step * 9, y + flatH, backZ), vh9, vw2));
-		blackStairsBottomWindows.add(new Quad(new Point(x + borderL + step * 9, y, z), vh1, vw2));
-		blackStairsBottomWindows.add(new Quad(new Point(x + borderL + step * 9, y, backZ), vh1, vw2));
+	private int wash;
+	private int block[];
+	private int mainStairs;
+	private int blockBottom[];
+	private int blackStairs;
 
+	private void setFlatsConfig(int type) {
+		if (type == 1) {
+			wash = 0;
+			block = new int[] { 1, 2, 4, 5, 6, 7, 8 };
+			mainStairs = 3;
+			blockBottom = new int[] { 4, 5, 6, 7, 8 };
+			blackStairs = 9;
+		} else {
+			wash = 9;
+			block = new int[] { 1, 2, 3, 4, 5, 7, 8 };
+			mainStairs = 6;
+			blockBottom = new int[] { 1, 2, 3, 4, 5 };
+			blackStairs = 0;
+		}
 	}
 
 	/**
