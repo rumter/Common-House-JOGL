@@ -12,7 +12,7 @@ public class ExampleWorld extends World {
 
 	private Quad ground;
 	private Block house;
-
+	// комент для теста коммита
 	public ExampleWorld(float x, float y, float z) {
 		super(x, y, z);
 
