@@ -1,6 +1,6 @@
 package org.rumter.chj.framework.execute;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.rumter.chj.App;
@@ -11,13 +11,15 @@ import org.rumter.chj.framework.model.special.coords.Axis;
 
 public class WorldLoader {
 
-	private static final String APP_PROPERTIES = "src/main/java/org/rumter/chj/app.properties";
+	private static final String PROPERTIES_FOLDER = "/properties";
+
+	private static final String APP_PROPERTIES = PROPERTIES_FOLDER + "/app.properties";
 
 	private void loadAppProperties() {
 		try {
 			Properties props = new Properties();
 
-			FileInputStream in = new FileInputStream(APP_PROPERTIES);
+			InputStream in = getClass().getResourceAsStream(APP_PROPERTIES);
 			props.load(in);
 
 			project = "org.rumter.chj.models." + props.getProperty("project") + "." + props.getProperty("project");

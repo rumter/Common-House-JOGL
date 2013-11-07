@@ -16,6 +16,7 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
+app.properties
 .classpath
 .settings/
 .loadpath
