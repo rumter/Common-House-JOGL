@@ -7,6 +7,7 @@ import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.geom.Quad;
 import org.rumter.chj.framework.model.base.Model;
 import org.rumter.chj.framework.model.base.SimpleModel;
+import org.rumter.chj.framework.model.primitives.Block;
 
 /**
  * Жилая часть общежития
@@ -15,6 +16,12 @@ import org.rumter.chj.framework.model.base.SimpleModel;
  * @email rumtery@yandex.ru
  */
 class MainHousePart extends SimpleModel {
+
+	private Block factoryBricksBlock(float x, float y, float z, float wx, float wz, float h) {
+		Block block = new Block(x, y, z, wx, wz, h);
+		block.setSideTexture("house/bricks");
+		return block;
+	}
 
 	/**
 	 * если type = 1, то вход слева<br />
@@ -28,7 +35,7 @@ class MainHousePart extends SimpleModel {
 	public MainHousePart(float x, float y, float z, int type) {
 		super(x, y, z);
 
-		bricks = new ArrayList<BricksBlock>();
+		bricks = new ArrayList<Block>();
 		washRoomsWindows = new ArrayList<Quad>();
 		blackStairsWindows = new ArrayList<Quad>();
 		blackStairsBottomWindows = new ArrayList<Quad>();
@@ -41,21 +48,21 @@ class MainHousePart extends SimpleModel {
 			float startY = (type == 1 ? y + HouseSizes.FLOOR_H : y);
 			int countFloors = (type == 1 ? 9 : 10);
 
-			bricks.add(new BricksBlock(x, // x
+			bricks.add(factoryBricksBlock(x, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
 					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
 					countFloors * HouseSizes.FLOOR_H // h
 			));
-			bricks.add(new BricksBlock(x, // x
+			bricks.add(factoryBricksBlock(x, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W - HouseSizes.SIDE_WINDOW_W, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
 					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
 					countFloors * HouseSizes.FLOOR_H // h
 			));
-			bricks.add(new BricksBlock(x + HouseSizes.SIDE_WINDOW_L, // x
+			bricks.add(factoryBricksBlock(x + HouseSizes.SIDE_WINDOW_L, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W + HouseSizes.BLOCK_SEPARATOR_LW, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
@@ -69,21 +76,22 @@ class MainHousePart extends SimpleModel {
 			float startY = (type == 2 ? y + HouseSizes.FLOOR_H : y);
 			int countFloors = (type == 2 ? 9 : 10);
 
-			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
+			bricks.add(factoryBricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
 					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wx
 					countFloors * HouseSizes.FLOOR_H // h
 			));
-			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
+			bricks.add(factoryBricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W - 1f, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
 					-HouseSizes.HOUSE_HALF_W - HouseSizes.BLOCK_SEPARATOR_LW, // wz
 					countFloors * HouseSizes.FLOOR_H // h
 			));
-			bricks.add(new BricksBlock(x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L - HouseSizes.SIDE_WINDOW_L, // x
+			bricks.add(factoryBricksBlock(
+					x + HouseSizes.HOUSE_L - HouseSizes.HOUSE_INDENT_L - HouseSizes.SIDE_WINDOW_L, // x
 					startY, // y
 					z + HouseSizes.BLOCK_SEPARATOR_LW - HouseSizes.HOUSE_HALF_W + HouseSizes.BLOCK_SEPARATOR_LW, // z
 					HouseSizes.HOUSE_INDENT_L, // wx
@@ -105,8 +113,8 @@ class MainHousePart extends SimpleModel {
 				if (type == 2) {
 					xStart += HouseSizes.BLACK_STAIRS_L - HouseSizes.BLOCK_L;
 				}
-				
-				bricks.add(new BricksBlock(xStart, // x
+
+				bricks.add(factoryBricksBlock(xStart, // x
 						y + HouseSizes.FLOOR_H, // y
 						z + HouseSizes.BLOCK_SEPARATOR_LW, // z
 						HouseSizes.BLOCK_SEPARATOR_LW, // wx
@@ -120,8 +128,8 @@ class MainHousePart extends SimpleModel {
 				if (type == 2) {
 					xStart += HouseSizes.BLACK_STAIRS_L - HouseSizes.BLOCK_L;
 				}
-				
-				bricks.add(new BricksBlock(xStart, // x
+
+				bricks.add(factoryBricksBlock(xStart, // x
 						y, // y
 						z + HouseSizes.BLOCK_SEPARATOR_LW, // z
 						HouseSizes.BLOCK_SEPARATOR_LW, // wx
@@ -208,7 +216,7 @@ class MainHousePart extends SimpleModel {
 	/**
 	 * модели для рисования
 	 */
-	private ArrayList<BricksBlock> bricks;
+	private ArrayList<Block> bricks;
 	private ArrayList<Quad> washRoomsWindows;
 	private ArrayList<Quad> blackStairsWindows;
 	private ArrayList<Quad> blackStairsBottomWindows;

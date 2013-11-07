@@ -85,7 +85,7 @@ public class DrawUtils {
 		drawQuadTex(q, TextureMode.REPEAT);
 	}
 
-	public void drawCylinder(Point p, float r, float h, int rotateX, int rotateY) {
+	/*public void drawCylinder(Point p, float r, float h, int rotateX, int rotateY) {
 		GL2 gl = App.gl;
 		gl.glPushMatrix();
 		gl.glTranslatef(p.x, p.y, p.z);
@@ -95,7 +95,7 @@ public class DrawUtils {
 		App.glu.gluQuadricTexture(glq, true);
 		App.glu.gluCylinder(glq, r, r, h, 20, 20);
 		gl.glPopMatrix();
-	}
+	}*/
 
 	public void drawSphere(Point p, float r) {
 		GL2 gl = App.gl;

@@ -1,6 +1,7 @@
 package org.rumter.chj.models.StudentCity.house;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.rumter.chj.framework.model.base.Model;
 import org.rumter.chj.framework.model.base.SimpleModel;
@@ -19,17 +20,18 @@ class HouseTop extends SimpleModel {
 
 		models = new ArrayList<Model>();
 
-		models.add(new Block(x, // x
+		Block block = new Block(x, // x
 				y + HouseSizes.TOP_START_H, // y
 				z + HouseSizes.BLOCK_SEPARATOR_LW, // z
 				HouseSizes.HOUSE_L, // wx
-				- HouseSizes.HOUSE_W, // wz
-				HouseSizes.TOP_H, // h
-				"house/houseTop" // tex
-		));
+				-HouseSizes.HOUSE_W, // wz
+				HouseSizes.TOP_H // h
+		);
+		block.setSideTexture("house/houseTop");
+		models.add(block);
 	}
 
-	private ArrayList<Model> models;
+	private List<Model> models;
 
 	@Override
 	public void display() {

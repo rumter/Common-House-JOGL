@@ -9,6 +9,7 @@ import org.rumter.chj.framework.geom.Quad;
 import org.rumter.chj.framework.model.base.Model;
 import org.rumter.chj.framework.model.base.SimpleModel;
 import org.rumter.chj.framework.model.primitives.Block;
+import org.rumter.chj.framework.model.primitives.Cylinder;
 
 /**
  * Вход и столовая
@@ -36,30 +37,45 @@ class BottomHousePart extends SimpleModel {
 	/**
 	 * колонны
 	 */
-	private static Point p1, p2, p3;
+	private Cylinder c1, c2, c3;
 
 	public BottomHousePart(float x, float y, float z, int type) {
 		super(x, y, z);
 
 		models = new ArrayList<Model>();
 
+		Block block;
+
 		// фундамент и крыша
 		float startX = (type == 1 ? x - ax : x - w1);
-		models.add(new Block(startX, y, z + az, wx, -wz, h1, "house/beton"));
-		models.add(new Block(startX, y + h - h1, z + az, wx, -wz, h2, "house/kr1"));
+		block = new Block(startX, y, z + az, wx, -wz, h1);
+		block.setSideTexture("house/beton");
+		models.add(block);
+		block = new Block(startX, y + h - h1, z + az, wx, -wz, h2);
+		block.setSideTexture("house/kr1");
+		models.add(block);
 
 		// здание
-		models.add(new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1, "house/build1"));
+		block = new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1);
+		block.setSideTexture("house/build1");
+		models.add(block);
 		if (type == 1) {
-			models.add(new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
+			block = new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f);
+			block.setSideTexture("house/build2");
+			models.add(block);
 		} else {
-			models.add(new Block(x - w1, y, z, w1, w2, h - h2 + 0.1f, "house/build2"));
+			block = new Block(x - w1, y, z, w1, w2, h - h2 + 0.1f);
+			block.setSideTexture("house/build2");
+			models.add(block);
 		}
 
 		// колонны
-		p1 = new Point(x + 2f, y + h1, z + 1f);
-		p2 = new Point(x + 9f, y + h1, z + 1f);
-		p3 = new Point(x + 18f, y + h1, z + 1f);
+		c1 = new Cylinder(x + 2f, y + h1, z + 1f, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		c2 = new Cylinder(x + 9f, y + h1, z + 1f, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		c3 = new Cylinder(x + 18f, y + h1, z + 1f, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		c1.setSideTexture("house/cylinder");
+		c2.setSideTexture("house/cylinder");
+		c3.setSideTexture("house/cylinder");
 
 		// окна
 		win1Quad = new Quad(new Point(x + 4f, y + h1 + 0.2f, z), new Point(0, 2, 0), new Point(3, 0, 0)).moveZ(0.01f);
@@ -86,10 +102,9 @@ class BottomHousePart extends SimpleModel {
 		App.drawUtils.drawQuadTex(doorQuad, TextureMode.STRETCH);
 		App.texUtils.prepareForDisplay("house/title8");
 		App.drawUtils.drawQuadTex(titleQuad, TextureMode.STRETCH);
-		App.texUtils.prepareForDisplay("house/cylinder");
-		App.drawUtils.drawCylinder(p1, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
-		App.drawUtils.drawCylinder(p2, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
-		App.drawUtils.drawCylinder(p3, 0.5f, h - h1 - h2 + 0.2f, -90, 0);
+		c1.display();
+		c2.display();
+		c3.display();
 		App.texUtils.prepareForDisplay("house/SimpleWindows");
 		App.drawUtils.drawQuadTex(win1Quad, TextureMode.STRETCH);
 		App.drawUtils.drawQuadTex(win2Quad, TextureMode.STRETCH);

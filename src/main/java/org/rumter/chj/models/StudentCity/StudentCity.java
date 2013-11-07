@@ -3,6 +3,7 @@ package org.rumter.chj.models.StudentCity;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.draw.tex.TextureSet;
 import org.rumter.chj.framework.model.base.World;
+import org.rumter.chj.models.StudentCity.fence.Fence;
 import org.rumter.chj.models.StudentCity.ground.Ground;
 import org.rumter.chj.models.StudentCity.house.CorpSet;
 
@@ -15,17 +16,20 @@ import org.rumter.chj.models.StudentCity.house.CorpSet;
 public class StudentCity extends World {
 
 	private Ground ground;
+	private Fence fence;
 	private CorpSet corpSet;
 
 	public StudentCity(float x, float y, float z) {
 		super(x, y, z);
 		ground = new Ground(x, y, z);
+		fence = new Fence(x, y, z);
 		corpSet = new CorpSet(x, y, z);
 	}
 
 	@Override
 	public void display() {
 		ground.display();
+		fence.display();
 		corpSet.display();
 	}
 

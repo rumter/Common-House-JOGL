@@ -17,7 +17,8 @@ public class ExampleWorld extends World {
 		super(x, y, z);
 
 		ground = new Quad(new Point(x - 1000, y, z - 1000), new Point(2000, 0, 0), new Point(0, 0, 2000));
-		house = new Block(x, y, z, 10, 10, 10, "example/metal");
+		house = new Block(x, y, z, 10, 10, 10);
+		house.setSideTexture("example/metal");
 
 		walls.add(new PlaneWall(x, z, x, z + 10, 10));
 		walls.add(new PlaneWall(x + 10, z, x + 10, z + 10, 10));
