@@ -1,7 +1,7 @@
 package org.rumter.chj.models.StudentCity.fence;
 
 public interface FenceSizes {
-	
+
 	/**
 	 * радиус главных столбов
 	 */
@@ -13,25 +13,25 @@ public interface FenceSizes {
 	/**
 	 * высота главного столба
 	 */
-	float COL1_H = 2.5f;
+	float COL1_H = 3.5f;
 	/**
 	 * высота высокого обычного столбца
 	 */
-	float COL2_BH = 2.6f;
+	float COL2_BH = 3.6f;
 	/**
 	 * высота низкого обычного столбца
 	 */
-	float COL2_SH = 2.4f;
-	
+	float COL2_SH = 3.4f;
+
 	/**
 	 * высота фундамента
 	 */
-	float BASE_H = 0.3f;
+	float BASE_H = 0.5f;
 	/**
 	 * ширина фундамента
 	 */
-	float BASE_D = 0.3f;
-	
+	float BASE_D = 1.1f;
+
 	/**
 	 * ширина железной линии
 	 */
@@ -48,7 +48,7 @@ public interface FenceSizes {
 	 * стартовая высота третьей линии
 	 */
 	float LINE_3_START_H = LINE_2_START_H - 0.03f;
-	
+
 	/**
 	 * стартовая высота основного столба
 	 */
@@ -57,10 +57,10 @@ public interface FenceSizes {
 	 * стартовая высота обычного столбца
 	 */
 	float COL2_START_H = LINE_1_START_H + LINE_H;
-	
+
 	/**
 	 * расстояние между столбцами
 	 */
-	float D_BETWEEN_COLS = 0.2f;
+	float D_BETWEEN_COLS = 0.3f;
 
 }

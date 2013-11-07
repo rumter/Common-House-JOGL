@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.geom.Quad;
-import org.rumter.chj.framework.model.base.SimpleModel;
+import org.rumter.chj.framework.model.base.Model;
 
 /**
  * Блок
@@ -13,7 +13,7 @@ import org.rumter.chj.framework.model.base.SimpleModel;
  * @author Митин Илья
  * @email rumtery@yandex.ru
  */
-public class Block extends SimpleModel {
+public class Block implements Model {
 
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 
@@ -37,13 +37,26 @@ public class Block extends SimpleModel {
 	private Quad topSide, bottomSide, frontSide, backSide, leftSide, rightSide;
 
 	public Block(float x, float y, float z, float wx, float wz, float h) {
-		super(x, y, z);
-		this.frontSide = new Quad(new Point(x, y, z), new Point(0, h, 0), new Point(wx, 0, 0));
-		this.backSide = new Quad(new Point(x, y, z + wz), new Point(0, h, 0), new Point(wx, 0, 0));
-		this.leftSide = new Quad(new Point(x, y, z), new Point(0, h, 0), new Point(0, 0, wz));
-		this.rightSide = new Quad(new Point(x + wx, y, z), new Point(0, h, 0), new Point(0, 0, wz));
-		this.topSide = new Quad(new Point(x, y, z), new Point(0, 0, wz), new Point(wx, 0, 0));
-		this.bottomSide = new Quad(new Point(x, y + h, z), new Point(0, 0, wz), new Point(wx, 0, 0));
+		this(new Quad(new Point(x, y, z), new Point(0, 0, wz), new Point(wx, 0, 0)), h);
+	}
+
+	public Block(Quad base, float h) {
+		this.bottomSide = base;
+		this.topSide = base.moveY(h);
+
+		Point bp1 = this.bottomSide.getP1();
+		Point bp2 = this.bottomSide.getP2();
+		Point bp3 = this.bottomSide.getP3();
+		Point bp4 = this.bottomSide.getP4();
+		Point tp1 = this.topSide.getP1();
+		Point tp2 = this.topSide.getP2();
+		Point tp3 = this.topSide.getP3();
+		Point tp4 = this.topSide.getP4();
+
+		this.frontSide = new Quad(bp1, tp1, tp4, bp4);
+		this.backSide = new Quad(bp3, tp3, tp2, bp2);
+		this.rightSide = new Quad(bp4, tp4, tp3, bp3);
+		this.leftSide = new Quad(bp2, tp2, tp1, bp1);
 	}
 
 	private void displaySide(Quad sideQuad, String sideTex, Color sideColor) {
