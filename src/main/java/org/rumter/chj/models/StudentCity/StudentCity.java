@@ -5,6 +5,7 @@ import org.rumter.chj.framework.draw.tex.TextureSet;
 import org.rumter.chj.framework.model.base.World;
 import org.rumter.chj.models.StudentCity.fence.Fence;
 import org.rumter.chj.models.StudentCity.ground.Ground;
+import org.rumter.chj.models.StudentCity.ground.TreeSet;
 import org.rumter.chj.models.StudentCity.house.CorpSet;
 
 /**
@@ -18,12 +19,14 @@ public class StudentCity extends World {
 	private Ground ground;
 	private Fence fence;
 	private CorpSet corpSet;
+	private TreeSet treeSet;
 
 	public StudentCity(float x, float y, float z) {
 		super(x, y, z);
 		ground = new Ground(x, y, z);
 		fence = new Fence(x, y, z);
 		corpSet = new CorpSet(x, y, z);
+		treeSet = new TreeSet(x, y, z);
 	}
 
 	@Override
@@ -31,6 +34,7 @@ public class StudentCity extends World {
 		ground.display();
 		fence.display();
 		corpSet.display();
+		treeSet.display();
 	}
 
 	@Override
@@ -48,7 +52,8 @@ public class StudentCity extends World {
 		ts.add(new String[] { "metal" });
 
 		ts.folder("ground");
-		ts.add(new String[] { "ground", "ground_1", "asphalt_1", "asphalt_25" });
+		ts.add(new String[] { "ground", "ground_1", "asphalt_1", "asphalt_25", "track1", "fund_side", "fund_top",
+				"urn_side", "urn_top", "black", "fence_side", "fence_top", "green", "tree" });
 
 		App.texUtils.loadTexures(ts);
 	}

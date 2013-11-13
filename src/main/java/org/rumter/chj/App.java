@@ -64,6 +64,8 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 		gl.glDepthFunc(GL.GL_LEQUAL);
 		gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 
+		gl.glBlendFunc(GL.GL_ONE, GL.GL_ONE_MINUS_SRC_ALPHA);
+
 		((Component) gLDrawable).addKeyListener(this);
 		((Component) gLDrawable).addMouseMotionListener(this);
 		Image cursorImage = Toolkit.getDefaultToolkit().getImage("xparent.gif");

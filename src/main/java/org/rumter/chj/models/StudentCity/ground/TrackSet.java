@@ -33,7 +33,7 @@ public class TrackSet extends SimpleModel {
 			{ { -327, 151 }, { -410, 151 } }, { { -293, 170 }, { -418, 170 } }, { { -327, 101 }, { -327, 170 } },
 			{ { -358, 101 }, { -358, 170 } }, { { -390, 101 }, { -390, 170 } } };
 
-	private final float TRACK_1_WIDTH = 2.0f;
+	private final float TRACK_1_WIDTH = 3.0f;
 	private final float TRACK_2_WIDTH = 1.5f;
 	/**
 	 * дорожки могут быть двух типов:<br />
@@ -81,6 +81,7 @@ public class TrackSet extends SimpleModel {
 			Quad q = new Quad(beginCenter, endCenter.sub(beginCenter), width);
 
 			if (type == 1) {
+				q = q.moveZ((float) (Math.random() * 0.1));
 				track1List.add(q);
 			} else {
 				track2List.add(q);
@@ -94,9 +95,9 @@ public class TrackSet extends SimpleModel {
 		for (Quad q : track2List) {
 			App.drawUtils.drawQuadTex(q);
 		}
-		App.texUtils.prepareForDisplay("ground/asphalt_25");
+		App.texUtils.prepareForDisplay("ground/track1");
 		for (Quad q : track1List) {
-			App.drawUtils.drawQuadTex(q);
+			App.drawUtils.drawQuadTexRepeat(q, 1, q.getH() / 2f);
 		}
 	}
 

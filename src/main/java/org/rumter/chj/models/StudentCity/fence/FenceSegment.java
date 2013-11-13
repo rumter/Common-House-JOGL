@@ -1,6 +1,5 @@
 package org.rumter.chj.models.StudentCity.fence;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +36,20 @@ public class FenceSegment implements Model {
 		Point vectD = p2.sub(p1);
 
 		base = new Block(new Quad(p1, vectD, FenceSizes.BASE_D), FenceSizes.BASE_H);
+		base.setSideTexture("ground/fence_side");
+		base.setTopTexture("ground/fence_top");
 
 		cols1 = new ArrayList<Cylinder>();
 		if (isDrawMainCol1) {
 			Point pCyl = p1.add(new Point(0, FenceSizes.COL1_START_H, 0));
 			Cylinder cyl = new Cylinder(pCyl.x, pCyl.y, pCyl.z, FenceSizes.COL1_R, FenceSizes.COL1_H, -90, 0);
-			cyl.setSideColor(Color.BLACK);
+			cyl.setSideTexture("ground/black");
 			cols1.add(cyl);
 		}
 		if (isDrawMainCol2) {
 			Point pCyl = p2.add(new Point(0, FenceSizes.COL1_START_H, 0));
 			Cylinder cyl = new Cylinder(pCyl.x, pCyl.y, pCyl.z, FenceSizes.COL1_R, FenceSizes.COL1_H, -90, 0);
-			cyl.setSideColor(Color.BLACK);
+			cyl.setSideTexture("ground/black");
 			cols1.add(cyl);
 		}
 
@@ -75,11 +76,12 @@ public class FenceSegment implements Model {
 		for (Cylinder cyl : cols1) {
 			cyl.display();
 		}
+		App.texUtils.prepareForDisplay("ground/black");
 		for (Quad line : lines) {
-			App.drawUtils.drawQuad(line, Color.BLACK);
+			App.drawUtils.drawQuadTex(line);
 		}
 		for (Quad col : cols2) {
-			App.drawUtils.drawQuad(col, Color.BLACK);
+			App.drawUtils.drawQuadTex(col);
 		}
 	}
 
