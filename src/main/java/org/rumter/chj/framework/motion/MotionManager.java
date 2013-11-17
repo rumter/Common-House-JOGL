@@ -31,6 +31,10 @@ public class MotionManager {
 		this.rotateY = rotateY;
 	}
 
+	public Point getPosition() {
+		return position;
+	}
+
 	public void display() {
 		GL2 gl = App.gl;
 		gl.glRotatef(rotateX, 1.0f, 0.0f, 0.0f);

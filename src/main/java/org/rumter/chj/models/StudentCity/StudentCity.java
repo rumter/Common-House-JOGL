@@ -3,6 +3,7 @@ package org.rumter.chj.models.StudentCity;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.draw.tex.TextureSet;
 import org.rumter.chj.framework.model.base.World;
+import org.rumter.chj.framework.model.primitives.TransparentModelContainer;
 import org.rumter.chj.models.StudentCity.fence.Fence;
 import org.rumter.chj.models.StudentCity.ground.Ground;
 import org.rumter.chj.models.StudentCity.ground.TreeSet;
@@ -20,6 +21,7 @@ public class StudentCity extends World {
 	private Fence fence;
 	private CorpSet corpSet;
 	private TreeSet treeSet;
+	private TransparentModelContainer transparentModelContainer;
 
 	public StudentCity(float x, float y, float z) {
 		super(x, y, z);
@@ -27,6 +29,8 @@ public class StudentCity extends World {
 		fence = new Fence(x, y, z);
 		corpSet = new CorpSet(x, y, z);
 		treeSet = new TreeSet(x, y, z);
+		transparentModelContainer = new TransparentModelContainer();
+		transparentModelContainer.addAll(treeSet.getTrees());
 	}
 
 	@Override
@@ -34,7 +38,7 @@ public class StudentCity extends World {
 		ground.display();
 		fence.display();
 		corpSet.display();
-		treeSet.display();
+		transparentModelContainer.display();
 	}
 
 	@Override
