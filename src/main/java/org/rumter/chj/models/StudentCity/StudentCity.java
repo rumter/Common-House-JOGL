@@ -3,8 +3,8 @@ package org.rumter.chj.models.StudentCity;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.draw.tex.TextureSet;
 import org.rumter.chj.framework.model.base.World;
-import org.rumter.chj.framework.model.primitives.TransparentModelContainer;
-import org.rumter.chj.models.StudentCity.fence.Fence;
+import org.rumter.chj.framework.model.primitives.SimpleModelContainer;
+import org.rumter.chj.models.StudentCity.fence.FenceSet;
 import org.rumter.chj.models.StudentCity.ground.Ground;
 import org.rumter.chj.models.StudentCity.ground.TreeSet;
 import org.rumter.chj.models.StudentCity.house.CorpSet;
@@ -18,27 +18,31 @@ import org.rumter.chj.models.StudentCity.house.CorpSet;
 public class StudentCity extends World {
 
 	private Ground ground;
-	private Fence fence;
+	private FenceSet fenceSet;
 	private CorpSet corpSet;
 	private TreeSet treeSet;
-	private TransparentModelContainer transparentModelContainer;
+	private SimpleModelContainer simpleModelContainer;
 
 	public StudentCity(float x, float y, float z) {
 		super(x, y, z);
+
 		ground = new Ground(x, y, z);
-		fence = new Fence(x, y, z);
+
+		simpleModelContainer = new SimpleModelContainer();
+
+		fenceSet = new FenceSet(x, y, z);
 		corpSet = new CorpSet(x, y, z);
 		treeSet = new TreeSet(x, y, z);
-		transparentModelContainer = new TransparentModelContainer();
-		transparentModelContainer.addAll(treeSet.getTrees());
+
+		simpleModelContainer.addAll(fenceSet.getFences());
+		simpleModelContainer.addAll(corpSet.getCorps());
+		simpleModelContainer.addAll(treeSet.getTrees());
 	}
 
 	@Override
 	public void display() {
 		ground.display();
-		fence.display();
-		corpSet.display();
-		transparentModelContainer.display();
+		simpleModelContainer.display();
 	}
 
 	@Override

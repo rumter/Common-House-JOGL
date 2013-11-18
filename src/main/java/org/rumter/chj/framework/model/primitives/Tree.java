@@ -22,7 +22,7 @@ public class Tree extends SimpleTransparentModel {
 	}
 
 	@Override
-	public void display() {
+	protected void _display() {
 		App.texUtils.prepareForDisplay(tex);
 		App.drawUtils.drawQuadTex(q1, TextureMode.STRETCH);
 		App.drawUtils.drawQuadTex(q2, TextureMode.STRETCH);

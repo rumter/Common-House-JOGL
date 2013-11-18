@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.rumter.chj.framework.geom.Point;
-import org.rumter.chj.framework.model.base.SimpleModel;
 
-public class Fence extends SimpleModel {
+public class FenceSet {
 
 	private List<FenceSegment> fenceSegments;
 
-	public Fence(float x, float y, float z) {
-		super(x, y, z);
-
+	public FenceSet(float x, float y, float z) {
 		fenceSegments = new ArrayList<FenceSegment>();
 		fenceSegments.add(new FenceSegment(x, y, z, new Point(0, 0, 0), new Point(-17, 0, 0), true, true));
 
@@ -40,11 +37,8 @@ public class Fence extends SimpleModel {
 
 	}
 
-	@Override
-	public void display() {
-		for (FenceSegment fs : fenceSegments) {
-			fs.display();
-		}
+	public List<FenceSegment> getFences() {
+		return fenceSegments;
 	}
 
 }
