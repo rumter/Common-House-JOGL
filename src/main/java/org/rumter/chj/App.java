@@ -114,19 +114,31 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 			break;
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_W:
-			motionManager.go();
+			motionManager.go(1);
+			break;
+		case KeyEvent.VK_Y:
+			motionManager.go(10);
 			break;
 		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_S:
-			motionManager.back();
+			motionManager.back(1);
+			break;
+		case KeyEvent.VK_H:
+			motionManager.back(10);
 			break;
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_D:
-			motionManager.right();
+			motionManager.right(1);
+			break;
+		case KeyEvent.VK_J:
+			motionManager.right(10);
 			break;
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_A:
-			motionManager.left();
+			motionManager.left(1);
+			break;
+		case KeyEvent.VK_G:
+			motionManager.left(10);
 			break;
 		case KeyEvent.VK_PAGE_UP:
 			motionManager.up();

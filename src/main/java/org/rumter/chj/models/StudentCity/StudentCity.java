@@ -60,8 +60,8 @@ public class StudentCity extends World {
 		ts.add(new String[] { "metal" });
 
 		ts.folder("ground");
-		ts.add(new String[] { "ground", "ground_1", "asphalt_1", "asphalt_25", "track1", "fund_side", "fund_top",
-				"urn_side", "urn_top", "black", "fence_side", "fence_top", "green", "tree" });
+		ts.add(new String[] { "ground", "ground_1", "asphalt_1", "asphalt_25", "track1", "track_side", "fund_side",
+				"fund_top", "klumb_side", "klumb_top", "black", "fence_side", "fence_top", "green", "tree" });
 
 		App.texUtils.loadTexures(ts);
 	}

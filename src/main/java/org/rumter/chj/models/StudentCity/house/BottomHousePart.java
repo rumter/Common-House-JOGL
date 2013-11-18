@@ -47,20 +47,22 @@ class BottomHousePart extends SimpleModel {
 		Block block;
 
 		// фундамент и крыша
-		float startX = (type == 1 ? x - ax : x - w1);
-		block = new Block(startX, y, z + az, wx, -wz, h1);
+		float startX = (type == 1 ? x - ax : x - w1 + 0.01f);
+		float fW = wx + (type == 1 ? HouseSizes.BLOCK_SEPARATOR_LW : 0) - 0.01f;
+		block = new Block(startX, y, z + az + 0.01f, fW, -wz + 0.01f, h1);
 		block.setSideTexture("house/beton");
 		models.add(block);
-		block = new Block(startX, y + h - h1, z + az, wx, -wz, h2);
+		float krW = wx + (type == 1 ? HouseSizes.BLOCK_SEPARATOR_LW : 0) + 0.01f;
+		block = new Block(startX, y + h - h1, z + az, krW, -wz, h2);
 		block.setSideTexture("house/kr1");
 		models.add(block);
 
 		// здание
-		block = new Block(x, y + h1, z, wx - ax, -wz + az + bz, h - h1);
+		block = new Block(x, y + h1, z, wx - ax + HouseSizes.BLOCK_SEPARATOR_LW - 0.01f, -wz + az + bz, h - h1);
 		block.setSideTexture("house/build1");
 		models.add(block);
 		if (type == 1) {
-			block = new Block(x + wx - ax - w1, y, z, w1, w2, h - h2 + 0.1f);
+			block = new Block(x + wx - ax - w1 + HouseSizes.BLOCK_SEPARATOR_LW, y, z, w1, w2, h - h2 + 0.1f);
 			block.setSideTexture("house/build2");
 			models.add(block);
 		} else {

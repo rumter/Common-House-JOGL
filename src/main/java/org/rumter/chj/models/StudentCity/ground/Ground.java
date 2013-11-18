@@ -19,7 +19,6 @@ public class Ground extends SimpleModel {
 
 	private TrackSet trackSet;
 
-
 	public Ground(float x, float y, float z) {
 		super(x, y, z);
 		q = new Quad(new Point(x - size / 2f, y + yLevel, z - size / 2f), new Point(size, 0, 0), new Point(0, 0, size));
@@ -29,7 +28,7 @@ public class Ground extends SimpleModel {
 	@Override
 	public void display() {
 		App.texUtils.prepareForDisplay("ground/green");
-		App.drawUtils.drawQuadTex(q);
+		App.drawUtils.drawQuadTexKRepeat(q, 2, 2);
 		trackSet.display();
 	}
 

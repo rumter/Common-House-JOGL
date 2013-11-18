@@ -68,8 +68,8 @@ public class MotionManager {
 	/**
 	 * вперёд
 	 */
-	public void go() {
-		Point newPosition = position.add(new Point(0, 0, -step).rotateXZ(rotateY));
+	public void go(float k) {
+		Point newPosition = position.add(new Point(0, 0, -step * k).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -78,8 +78,8 @@ public class MotionManager {
 	/**
 	 * вправо
 	 */
-	public void right() {
-		Point newPosition = position.add(new Point(step, 0, 0).rotateXZ(rotateY));
+	public void right(float k) {
+		Point newPosition = position.add(new Point(step * k, 0, 0).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -88,8 +88,8 @@ public class MotionManager {
 	/**
 	 * назад
 	 */
-	public void back() {
-		Point newPosition = position.sub(new Point(0, 0, -step).rotateXZ(rotateY));
+	public void back(float k) {
+		Point newPosition = position.sub(new Point(0, 0, -step * k).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}
@@ -98,8 +98,8 @@ public class MotionManager {
 	/**
 	 * влево
 	 */
-	public void left() {
-		Point newPosition = position.sub(new Point(step, 0, 0).rotateXZ(rotateY));
+	public void left(float k) {
+		Point newPosition = position.sub(new Point(step * k, 0, 0).rotateXZ(rotateY));
 		if (isCorrectPosition(newPosition)) {
 			position = newPosition;
 		}

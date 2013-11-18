@@ -31,6 +31,8 @@ public class Block implements Model {
 	private String leftTexture = null;
 	private String rightTexture = null;
 
+	private float kTopX = 0, kTopY = 0;
+
 	/**
 	 * стороны блока
 	 */
@@ -74,7 +76,14 @@ public class Block implements Model {
 		displaySide(backSide, backTexture, backColor);
 		displaySide(leftSide, leftTexture, leftColor);
 		displaySide(rightSide, rightTexture, rightColor);
-		displaySide(topSide, topTexture, topColor);
+
+		if (kTopX != 0 && kTopY != 0) {
+			App.texUtils.prepareForDisplay(topTexture);
+			App.drawUtils.drawQuadTexKRepeat(topSide, kTopX, kTopY);
+		} else {
+			displaySide(topSide, topTexture, topColor);
+		}
+
 		displaySide(bottomSide, bottomTexture, bottomColor);
 	}
 
@@ -156,6 +165,12 @@ public class Block implements Model {
 
 	public void setTopTexture(String topTexture) {
 		this.topTexture = topTexture;
+	}
+
+	public void setTopTexture(String topTexture, float kX, float kY) {
+		this.topTexture = topTexture;
+		this.kTopX = kX;
+		this.kTopY = kY;
 	}
 
 	public String getBottomTexture() {

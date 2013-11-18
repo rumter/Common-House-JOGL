@@ -73,7 +73,7 @@ public class DrawUtils {
 		}
 	}
 
-	public void drawQuadTexRepeat(Quad q, float cntX, float cntY) {
+	public void drawQuadTexCntRepeat(Quad q, float cntX, float cntY) {
 		if (App.shadowManager.isShadowMode()) {
 			drawQuad(q, ShadowManager.SHADOW_COLOR);
 		} else {
@@ -81,21 +81,25 @@ public class DrawUtils {
 		}
 	}
 
+	public void drawQuadTexKRepeat(Quad q, float kX, float kY) {
+		if (App.shadowManager.isShadowMode()) {
+			drawQuad(q, ShadowManager.SHADOW_COLOR);
+		} else {
+			drawTex(q, q.getW() * kX, q.getH() * kY);
+		}
+	}
+
 	public void drawQuadTex(Quad q) {
 		drawQuadTex(q, TextureMode.REPEAT);
 	}
 
-	/*public void drawCylinder(Point p, float r, float h, int rotateX, int rotateY) {
-		GL2 gl = App.gl;
-		gl.glPushMatrix();
-		gl.glTranslatef(p.x, p.y, p.z);
-		gl.glRotatef(rotateX, 1, 0, 0);
-		gl.glRotatef(rotateY, 0, 1, 0);
-		GLUquadric glq = App.glu.gluNewQuadric();
-		App.glu.gluQuadricTexture(glq, true);
-		App.glu.gluCylinder(glq, r, r, h, 20, 20);
-		gl.glPopMatrix();
-	}*/
+	/*
+	 * public void drawCylinder(Point p, float r, float h, int rotateX, int
+	 * rotateY) { GL2 gl = App.gl; gl.glPushMatrix(); gl.glTranslatef(p.x, p.y,
+	 * p.z); gl.glRotatef(rotateX, 1, 0, 0); gl.glRotatef(rotateY, 0, 1, 0);
+	 * GLUquadric glq = App.glu.gluNewQuadric(); App.glu.gluQuadricTexture(glq,
+	 * true); App.glu.gluCylinder(glq, r, r, h, 20, 20); gl.glPopMatrix(); }
+	 */
 
 	public void drawSphere(Point p, float r) {
 		GL2 gl = App.gl;
