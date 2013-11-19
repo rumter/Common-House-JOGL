@@ -2,8 +2,10 @@ package org.rumter.chj.models.StudentCity;
 
 import org.rumter.chj.App;
 import org.rumter.chj.framework.draw.tex.TextureSet;
+import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.model.base.World;
 import org.rumter.chj.framework.model.primitives.SimpleModelContainer;
+import org.rumter.chj.framework.model.primitives.SkyBox;
 import org.rumter.chj.models.StudentCity.fence.FenceSet;
 import org.rumter.chj.models.StudentCity.ground.Ground;
 import org.rumter.chj.models.StudentCity.ground.TreeSet;
@@ -21,6 +23,7 @@ public class StudentCity extends World {
 	private FenceSet fenceSet;
 	private CorpSet corpSet;
 	private TreeSet treeSet;
+	private SkyBox skybox;
 	private SimpleModelContainer simpleModelContainer;
 
 	public StudentCity(float x, float y, float z) {
@@ -33,6 +36,7 @@ public class StudentCity extends World {
 		fenceSet = new FenceSet(x, y, z);
 		corpSet = new CorpSet(x, y, z);
 		treeSet = new TreeSet(x, y, z);
+		skybox = new SkyBox(new Point(-250, 0, 100), 300, "sky/skybox1");
 
 		simpleModelContainer.addAll(fenceSet.getFences());
 		simpleModelContainer.addAll(corpSet.getCorps());
@@ -41,6 +45,7 @@ public class StudentCity extends World {
 
 	@Override
 	public void display() {
+		skybox.display();
 		ground.display();
 		simpleModelContainer.display();
 	}
@@ -58,6 +63,9 @@ public class StudentCity extends World {
 
 		ts.folder("axis");
 		ts.add(new String[] { "metal" });
+
+		ts.folder("sky");
+		ts.add(new String[] { "skybox1" });
 
 		ts.folder("ground");
 		ts.add(new String[] { "ground", "ground_1", "asphalt_1", "asphalt_25", "track1", "track_side", "fund_side",
