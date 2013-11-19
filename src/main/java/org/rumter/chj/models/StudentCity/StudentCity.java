@@ -12,7 +12,7 @@ import org.rumter.chj.models.StudentCity.ground.TreeSet;
 import org.rumter.chj.models.StudentCity.house.CorpSet;
 
 /**
- * карта
+ * студенческий городок
  * 
  * @author Митин Илья
  * @email rumtery@yandex.ru
