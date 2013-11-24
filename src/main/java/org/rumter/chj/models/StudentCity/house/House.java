@@ -34,9 +34,9 @@ public class House extends SimpleModel {
 	public void display() {
 		App.gl.glPushMatrix();
 		if (type == 1) {
-			App.gl.glTranslatef(x, y, z);
+			App.gl.glTranslatef(p.x, p.y, p.z);
 		} else {
-			App.gl.glTranslatef(x + HouseSizes.HOUSE_L, y, z - HouseSizes.HOUSE_W);
+			App.gl.glTranslatef(p.x + HouseSizes.HOUSE_L, p.y, p.z - HouseSizes.HOUSE_W);
 			App.gl.glRotatef(180, 0, 1, 0);
 		}
 		mainPart.display();

@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.geom.Quad;
-import org.rumter.chj.framework.model.base.Model;
+import org.rumter.chj.framework.model.base.SimpleModel;
 
 /**
  * Блок
@@ -13,7 +13,7 @@ import org.rumter.chj.framework.model.base.Model;
  * @author Митин Илья
  * @email rumtery@yandex.ru
  */
-public class Block implements Model {
+public class Block extends SimpleModel {
 
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 
@@ -43,6 +43,7 @@ public class Block implements Model {
 	}
 
 	public Block(Quad base, float h) {
+		super(base.getP1());
 		this.bottomSide = base;
 		this.topSide = base.moveY(h);
 
@@ -260,4 +261,5 @@ public class Block implements Model {
 	public void setRightSide(Quad rightSide) {
 		this.rightSide = rightSide;
 	}
+
 }

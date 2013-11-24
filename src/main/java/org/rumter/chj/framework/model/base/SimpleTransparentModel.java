@@ -3,8 +3,13 @@ package org.rumter.chj.framework.model.base;
 import javax.media.opengl.GL2;
 
 import org.rumter.chj.App;
+import org.rumter.chj.framework.geom.Point;
 
 public abstract class SimpleTransparentModel extends SimpleModel implements TransparentModel {
+
+	public SimpleTransparentModel(Point p) {
+		super(p);
+	}
 
 	public SimpleTransparentModel(float x, float y, float z) {
 		super(x, y, z);

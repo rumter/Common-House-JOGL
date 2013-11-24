@@ -32,8 +32,8 @@ public class FenceSegment extends SimpleModel {
 	public FenceSegment(float x, float y, float z, Point _p1, Point _p2, boolean isDrawMainCol1, boolean isDrawMainCol2) {
 		super(x, y, z);
 
-		Point p1 = _p1.add(position);
-		Point p2 = _p2.add(position);
+		Point p1 = _p1.add(p);
+		Point p2 = _p2.add(p);
 		Point vectD = p2.sub(p1);
 
 		base = new Block(new Quad(p1, vectD, FenceSizes.BASE_D), FenceSizes.BASE_H);

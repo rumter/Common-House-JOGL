@@ -14,20 +14,20 @@ public abstract class SimpleModel implements Model, SortableByLook {
 	/**
 	 * начальные координаты (левый нижний угол)
 	 */
-	protected float x, z, y;
-	protected Point position;
+	protected Point p;
+
+	public SimpleModel(Point position) {
+		this.p = position;
+	}
 
 	public SimpleModel(float x, float y, float z) {
-		this.x = x;
-		this.z = z;
-		this.y = y;
-		this.position = new Point(x, y, z);
+		this.p = new Point(x, y, z);
 	}
 
 	@Override
 	public float getQDistanceToLook() {
 		Point pos = App.motionManager.getPosition();
-		Point v = pos.sub(position);
+		Point v = pos.sub(p);
 		return v.x * v.x + v.y * v.y + v.z * v.z;
 	}
 
