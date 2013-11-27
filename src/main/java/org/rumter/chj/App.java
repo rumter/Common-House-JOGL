@@ -51,7 +51,7 @@ public class App implements GLEventListener, KeyListener, MouseMotionListener {
 	public static WorldLoader worldLoader;
 
 	public static GL2 gl;
-//123
+
 	@Override
 	public void init(GLAutoDrawable gLDrawable) {
 		gl = gLDrawable.getGL().getGL2();

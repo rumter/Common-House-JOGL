@@ -80,7 +80,7 @@ public class WorldLoader {
 		}
 
 		App.lightManager.initLight0(new Point(startModelPositionX, startModelPositionY, startModelPositionZ));
-		// App.shadowManager.initShadowMatrix(App.lightManager.getPosition0());
+		//App.shadowManager.initShadowMatrix(App.lightManager.getPosition0());
 
 		profileManager = new ProfileManager();
 
