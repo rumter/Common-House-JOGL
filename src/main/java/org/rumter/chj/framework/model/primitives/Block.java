@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.rumter.chj.App;
 import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.geom.Quad;
-import org.rumter.chj.framework.model.base.Model;
+import org.rumter.chj.framework.model.base.SimpleModel;
 
 /**
  * Блок
@@ -13,7 +13,7 @@ import org.rumter.chj.framework.model.base.Model;
  * @author Митин Илья
  * @email rumtery@yandex.ru
  */
-public class Block implements Model {
+public class Block extends SimpleModel {
 
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 
@@ -31,6 +31,8 @@ public class Block implements Model {
 	private String leftTexture = null;
 	private String rightTexture = null;
 
+	private float kTopX = 0, kTopY = 0;
+
 	/**
 	 * стороны блока
 	 */
@@ -42,6 +44,7 @@ public class Block implements Model {
 	}
 
 	public Block(Quad base, float h) {
+		super(base.getP1());
 		this.bottomSide = base;
 		this.topSide = base.moveY(h);
 
@@ -76,7 +79,14 @@ public class Block implements Model {
 		displaySide(backSide, backTexture, backColor);
 		displaySide(leftSide, leftTexture, leftColor);
 		displaySide(rightSide, rightTexture, rightColor);
-		displaySide(topSide, topTexture, topColor);
+
+		if (kTopX != 0 && kTopY != 0) {
+			App.texUtils.prepareForDisplay(topTexture);
+			App.drawUtils.drawQuadTexKRepeat(topSide, kTopX, kTopY);
+		} else {
+			displaySide(topSide, topTexture, topColor);
+		}
+
 		displaySide(bottomSide, bottomTexture, bottomColor);
 	}
 
@@ -158,6 +168,12 @@ public class Block implements Model {
 
 	public void setTopTexture(String topTexture) {
 		this.topTexture = topTexture;
+	}
+
+	public void setTopTexture(String topTexture, float kX, float kY) {
+		this.topTexture = topTexture;
+		this.kTopX = kX;
+		this.kTopY = kY;
 	}
 
 	public String getBottomTexture() {
@@ -247,4 +263,5 @@ public class Block implements Model {
 	public void setRightSide(Quad rightSide) {
 		this.rightSide = rightSide;
 	}
+
 }

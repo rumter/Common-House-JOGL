@@ -55,12 +55,12 @@ public class LightManager {
 			gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, white, 0);
 			gl.glMateriali(GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 128);
 			gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL2.GL_EMISSION, emission, 0);
-			App.drawUtils.drawSphere(new Point(l0DrawPosition[0], l0DrawPosition[1], l0DrawPosition[2]), 1f);
+			//App.drawUtils.drawSphere(new Point(l0DrawPosition[0], l0DrawPosition[1], l0DrawPosition[2]), 1f);
 		}
 	}
 
 	public void stopLighiting() {
-		App.gl.glDisable(GLLightingFunc.GL_LIGHTING);
+		 App.gl.glDisable(GLLightingFunc.GL_LIGHTING);
 	}
 
 }

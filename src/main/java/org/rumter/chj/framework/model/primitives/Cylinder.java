@@ -35,7 +35,7 @@ public class Cylinder extends SimpleModel {
 	public void display() {
 		GL2 gl = App.gl;
 		gl.glPushMatrix();
-		gl.glTranslatef(x, y, z);
+		gl.glTranslatef(p.x, p.y, p.z);
 		gl.glRotatef(rotateX, 1, 0, 0);
 		gl.glRotatef(rotateY, 0, 1, 0);
 

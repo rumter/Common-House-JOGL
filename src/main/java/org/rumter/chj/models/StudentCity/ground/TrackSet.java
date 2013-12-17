@@ -3,10 +3,10 @@ package org.rumter.chj.models.StudentCity.ground;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.rumter.chj.App;
 import org.rumter.chj.framework.geom.Point;
 import org.rumter.chj.framework.geom.Quad;
 import org.rumter.chj.framework.model.base.SimpleModel;
+import org.rumter.chj.framework.model.primitives.Block;
 
 /**
  * Дорожки
@@ -51,19 +51,17 @@ public class TrackSet extends SimpleModel {
 		return 0;
 	}
 
-	private final float Y_LEVEL1 = 0.02f;
-	private final float Y_LEVEL2 = 0.01f;
+	private final float Y_LEVEL1 = 0.1f;
+	private final float Y_LEVEL2 = 0.09f;
 
-	private List<Quad> track1List;
-	private List<Quad> track2List;
+	private List<Block> trackList;
 
 	public TrackSet(float x, float y, float z) {
 		super(x, y, z);
 
 		Point startPoint = new Point(x, y, z);
 
-		track1List = new ArrayList<Quad>();
-		track2List = new ArrayList<Quad>();
+		trackList = new ArrayList<Block>();
 
 		for (int i = 1; i <= TRACK_COUNT; ++i) {
 			float c1[] = trackCoords[i][0];
@@ -73,8 +71,8 @@ public class TrackSet extends SimpleModel {
 
 			float yLevel = (type == 1 ? Y_LEVEL1 : Y_LEVEL2);
 
-			Point beginCenter = new Point(c1[TRACK_COORD_X], yLevel, c1[TRACK_COORD_Z]).add(startPoint);
-			Point endCenter = new Point(c2[TRACK_COORD_X], yLevel, c2[TRACK_COORD_Z]).add(startPoint);
+			Point beginCenter = new Point(c1[TRACK_COORD_X], 0, c1[TRACK_COORD_Z]).add(startPoint);
+			Point endCenter = new Point(c2[TRACK_COORD_X], 0, c2[TRACK_COORD_Z]).add(startPoint);
 
 			float width = (type == 1 ? TRACK_1_WIDTH : TRACK_2_WIDTH);
 
@@ -82,22 +80,23 @@ public class TrackSet extends SimpleModel {
 
 			if (type == 1) {
 				q = q.moveZ((float) (Math.random() * 0.1));
-				track1List.add(q);
-			} else {
-				track2List.add(q);
 			}
+
+			Block block = new Block(q, yLevel);
+			block.setSideTexture("ground/track_side");
+			if (type == 1) {
+				block.setTopTexture("ground/track1", 0.33f, 0.5f);
+			} else {
+				block.setTopTexture("ground/asphalt_1");
+			}
+			trackList.add(block);
 		}
 	}
 
 	@Override
 	public void display() {
-		App.texUtils.prepareForDisplay("ground/asphalt_1");
-		for (Quad q : track2List) {
-			App.drawUtils.drawQuadTex(q);
-		}
-		App.texUtils.prepareForDisplay("ground/track1");
-		for (Quad q : track1List) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, q.getH() / 2f);
+		for (Block block : trackList) {
+			block.display();
 		}
 	}
 

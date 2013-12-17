@@ -231,27 +231,27 @@ class MainHousePart extends SimpleModel {
 		}
 		App.texUtils.prepareForDisplay("house/WashRoomWindow");
 		for (Quad q : washRoomsWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 9);
 		}
 		App.texUtils.prepareForDisplay("house/BlackStairsWindow");
 		for (Quad q : blackStairsWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 9);
 		}
 		App.texUtils.prepareForDisplay("house/BlackStairsWindow2");
 		for (Quad q : blackStairsBottomWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 1);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 1);
 		}
 		App.texUtils.prepareForDisplay("house/MainStairsWindow");
 		for (Quad q : mainStairsWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 9);
 		}
 		App.texUtils.prepareForDisplay("house/WindowsBlock");
 		for (Quad q : blockWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 9);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 9);
 		}
 		App.texUtils.prepareForDisplay("house/WindowsBlock2");
 		for (Quad q : blockBottomWindows) {
-			App.drawUtils.drawQuadTexRepeat(q, 1, 1);
+			App.drawUtils.drawQuadTexCntRepeat(q, 1, 1);
 		}
 	}
 }

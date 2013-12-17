@@ -36,7 +36,7 @@ public class ShadowManager {
 		gl.glDisable(GLLightingFunc.GL_LIGHTING);
 		gl.glColor4fv(SHADOW_COLOR_fv, 0);
 		gl.glPushMatrix();
-		gl.glTranslatef(0, 0.01f, 0);
+		gl.glTranslatef(0, 1f, 0);
 		this.isShadowMode = true;
 		gl.glMultMatrixf(shadowMatrix, 0);
 	}
