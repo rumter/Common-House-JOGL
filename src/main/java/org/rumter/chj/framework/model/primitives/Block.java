@@ -37,7 +37,8 @@ public class Block implements Model {
 	private Quad topSide, bottomSide, frontSide, backSide, leftSide, rightSide;
 
 	public Block(float x, float y, float z, float wx, float wz, float h) {
-		this(new Quad(new Point(x, y, z), new Point(0, 0, wz), new Point(wx, 0, 0)), h);
+		this(new Quad(new Point(x, y, z), new Point(0, 0, wz), new Point(wx, 0,
+				0)), h);
 	}
 
 	public Block(Quad base, float h) {
@@ -64,7 +65,8 @@ public class Block implements Model {
 			App.texUtils.prepareForDisplay(sideTex);
 			App.drawUtils.drawQuadTex(sideQuad);
 		} else {
-			App.drawUtils.drawQuad(sideQuad, sideColor != null ? sideColor : DEFAULT_COLOR);
+			App.drawUtils.drawQuad(sideQuad, sideColor != null ? sideColor
+					: DEFAULT_COLOR);
 		}
 	}
 
