@@ -46,6 +46,18 @@ public class DrawUtils {
 		gl.glVertex3fv(q.getVertexArray()[3], 0);
 		gl.glEnd();
 	}
+	public void drawTextre(Point a, Point b, Point c) {
+		GL2 gl = App.gl;
+		gl.glBegin(GL2.GL_TRIANGLES);
+		gl.glTexCoord2f(0,1 );
+		gl.glVertex3f(a.x, a.y, a.z) ;
+		gl.glTexCoord2f(1, 1);
+		gl.glVertex3f(b.x, b.y, b.z);
+		gl.glTexCoord2f(0.5f, 0);
+		gl.glVertex3f(c.x, c.y, c.z);
+		
+		gl.glEnd();
+	}
 
 	public void drawQuad(Quad q, Color c) {
 		GL2 gl = App.gl;
@@ -60,6 +72,7 @@ public class DrawUtils {
 		gl.glVertex3fv(q.getVertexArray()[3], 0);
 		gl.glEnd();
 	}
+	
 
 	public void drawQuadTex(Quad q, TextureMode mode) {
 		if (App.shadowManager.isShadowMode()) {
